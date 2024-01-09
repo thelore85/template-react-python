@@ -1,7 +1,14 @@
+###########################################
+# Main Flask Configuration and End Points #
+###########################################
+
 from flask import Flask, jsonify, request
 from flask_migrate import Migrate
-from admin import setup_admin
-from model import db, User
+
+
+# file link
+from api.admin import setup_admin
+from api.model import db, User
 
 
 app = Flask(__name__)
@@ -58,3 +65,9 @@ def post_admin():
 if __name__ == "__main__":
     app.run(debug=True, port= port)
     db.create_all()
+
+
+    #################################################################
+#################################################################
+# How to migrate tables structure changes without loosing data. eg: if I delate a column with data
+# Should I create a route.py file to manage api routes?

@@ -1,5 +1,5 @@
 import os
-from model import db, User, Pro, Patient, Service, ProPage, ProService, Specialization, ProHoliday, Booking
+from api.model import db, User, Pro, Patient, Service, ProPage, ProService, Specialization, ProHoliday, Booking
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
 

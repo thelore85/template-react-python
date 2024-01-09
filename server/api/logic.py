@@ -1,7 +1,7 @@
-from model import db, Pro, ProAgenda, Holiday, ProAvailability
+from api.model import db, Pro, ProAgenda, Holiday, ProAvailability
 from datetime import datetime, timedelta
 import holidays
-from enums import BookingStatus, Weekday, Boolean, Specialization, VisitType
+from api.enums import BookingStatus, Weekday, Boolean, Specialization, VisitType
 
 
 # Copia qui la funzione get_enum_values
