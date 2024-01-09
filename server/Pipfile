@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
+holidays = "*"
+flask-admin = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
+
+[scripts]
+start = "flask run -p 5005 -h 0.0.0.0"
+init = "flask db init"
+migrate = "flask db migrate"
+upgrade = "flask db upgrade"
+deploy = "echo 'Please follow this 3 steps to deploy: https://start.4geeksacademy.com/deploy/render' "
