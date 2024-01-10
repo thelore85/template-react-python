@@ -9,6 +9,8 @@ flask-sqlalchemy = "*"
 flask-migrate = "*"
 holidays = "*"
 flask-admin = "*"
+flask-jwt-extended = "*"
+flask-cors = "*"
 
 [dev-packages]
 
@@ -16,7 +18,7 @@ flask-admin = "*"
 python_version = "3.12"
 
 [scripts]
-start = "flask run -p 5005 -h 0.0.0.0"
+start = "flask run -p 2001 -h 0.0.0.0"
 init = "flask db init"
 migrate = "flask db migrate"
 upgrade = "flask db upgrade"

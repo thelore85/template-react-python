@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart} from '@fortawesome/free-solid-svg-icons'
 
 // Components
-import logo from '../../img/plannermed_logo.png';
+// import logo from '../../img/plannermed_logo.png';
+import logo from '../../img/logo2.png';
 
 export default function Navbar() {
 

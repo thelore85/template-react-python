@@ -8,11 +8,13 @@ import SignupLayout from "../layout/SignupLayout";
 
 // Views
 import Home from "../views/Home";
+import Login from "../views/login/login.js";
 import Signup from "../views/signup/Signup";
 import SignupPersonalData from "../views/signup/SignupPersonalData";
 import SignupSpecialization from "../views/signup/SignupSpecialization.js";
 import SignupService from "../views/signup/SignupService.js";
-import SignupLandingPage from "../views/signup/SignupLandingPage.js";
+import SignupStudio from "../views/signup/SignupStudio.js";
+import SignupUrl from "../views/signup/SignupUrl.js";
 import SignupReview from "../views/signup/SignupReview.js";
 import SignupThankYou from "../views/signup/SignupThankYou.js";
 import Dashboard from "../views/dashboard/Dashboard.js";
@@ -38,10 +40,12 @@ export default function Router() {
               
               {/* SIGNUP */}
               <Route path="/signup/" element={<SignupLayout><Signup /></SignupLayout>} />
+              <Route path="/login/" element={<SignupLayout><Login /></SignupLayout>} />
               <Route path="/signup/personal-data" element={<SignupLayout><SignupPersonalData /></SignupLayout>} />
               <Route path="/signup/select-specialization" element={<SignupLayout><SignupSpecialization /></SignupLayout>} />
               <Route path="/signup/select-service" element={<SignupLayout><SignupService /></SignupLayout>} />
-              <Route path="/signup/landing-page" element={<SignupLayout><SignupLandingPage /></SignupLayout>} />
+              <Route path="/signup/studio" element={<SignupLayout><SignupStudio /></SignupLayout>} />
+              <Route path="/signup/url" element={<SignupLayout><SignupUrl /></SignupLayout>} />
               <Route path="/signup/review" element={<SignupLayout><SignupReview /></SignupLayout>} />
               <Route path="/signup/thank-you" element={<SignupLayout><SignupThankYou /></SignupLayout>} />
             

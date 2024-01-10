@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Components
-import logo from '../../img/plannermed_logo.png';
+// import logo from '../../img/plannermed_logo.png';
+import logo from '../../img/logo2.png';
 
 export default function NavLogo() {
 

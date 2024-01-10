@@ -5,7 +5,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 
 
-export default function SignupLandingPage() {
+export default function SignupStudio() {
 
   return (
     <> 
@@ -24,28 +24,17 @@ export default function SignupLandingPage() {
               
              <hr class="my-4" />
 
-             <div class="col-12 mb-3">
-                <label for="username" class="form-label">Brand or Center name</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text">@</span>
-                  <input type="text" class="form-control" id="username" placeholder="Brand Name" required="" />
-                  <div class="invalid-feedback">
-                    Name Require
-                  </div>
-                </div>
-              </div>
-
 
               <div class="col-12 mb-3">
                 <label for="address" class="form-label">Address</label>
                 <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="" />
                 <div class="invalid-feedback">
-                  Please enter your shipping address.
+                  Please enter your studio address.
                 </div>
               </div>
 
               <div className="row">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-6 mb-3">
                   <label for="country" class="form-label">Country</label>
                   <select class="form-select" id="country" required="">
                     <option value="">Choose...</option>
@@ -57,7 +46,7 @@ export default function SignupLandingPage() {
                   </div>
                 </div>
 
-                <div class="col-md-4 mb-3">
+                <div class="col-md-6 mb-3">
                   <label for="state" class="form-label">City</label>
                   <select class="form-select" id="state" required="">
                     <option value="">Choose...</option>
@@ -69,19 +58,29 @@ export default function SignupLandingPage() {
                   </div>
                 </div>
 
-
-                <div class="col-md-4 mb-3">
-                  <label for="zip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="zip" placeholder="" required="" />
+                <div class="col-12 mb-3">
+                  <label for="address" class="form-label">Phone</label>
+                  <input type="number" class="form-control" id="address" placeholder="+39 331 1234567" required="" />
                   <div class="invalid-feedback">
-                    Zip code required.
+                    Please enter your Studio Phone Number.
                   </div>
                 </div>
-              
+
+                <div class="col-12 mb-3">
+                <label for="username" class="form-label">Personal URL</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text">www.plannermed.com/</span>
+                  <input type="text" class="form-control" id="username" placeholder="mystudio" required="" />
+                  <div class="invalid-feedback">
+                    Name Require
+                  </div>
+                </div>
+              </div>
+
               </div>
 
 
-            <Link to="/signup/review" className=" d-inline" style={{ textDecoration:'none'}} >
+            <Link to="/signup/url" className=" d-inline" style={{ textDecoration:'none'}} >
               <button className="w-100 btn btn-primary btn-lg mt-5" type="submit">Next</button>
             </Link>
 

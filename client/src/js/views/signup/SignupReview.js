@@ -36,7 +36,7 @@ export default function SignupReview() {
           <button className="w-100 btn btn-primary btn-lg mt-5" type="submit">Complete</button>
         </Link>
 
-        <Link to="/signup/landing-page" className="" style={{ textDecoration:'none'}} >
+        <Link to="/signup/url" className="" style={{ textDecoration:'none'}} >
           <p className="py-3 text-white" type="submit"> {'<'}  Go Back</p>
         </Link>
 

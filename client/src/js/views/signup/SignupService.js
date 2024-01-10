@@ -54,7 +54,7 @@ export default function SignupService() {
             </div>
 
 
-            <Link to="/signup/landing-page" className=" d-inline" style={{ textDecoration:'none'}} >
+            <Link to="/signup/studio" className=" d-inline" style={{ textDecoration:'none'}} >
               <button className="w-100 btn btn-primary btn-lg mt-5" type="submit">Next</button>
             </Link>
 

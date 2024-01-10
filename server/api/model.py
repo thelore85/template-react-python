@@ -24,10 +24,10 @@ class Pro(db.Model):
     __tablename__ = 'pro'
     id = db.Column(db.Integer, primary_key=True)
     
-    name = db.Column(db.String(50), nullable=False)
-    last_name = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    phone = db.Column(db.Integer, unique=True, nullable=False)
+    name = db.Column(db.String(50))
+    last_name = db.Column(db.String(50))
+    email = db.Column(db.String(100), unique=True)
+    phone = db.Column(db.Integer, unique=True)
     password = db.Column(db.String(100))
 
     def serialize(self):
