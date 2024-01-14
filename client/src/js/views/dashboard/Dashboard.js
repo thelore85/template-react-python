@@ -23,13 +23,15 @@ export default function Dashboard() {
             },
           });
 
-          console.log(response)
-  
+          console.log('api/dashboard response: ', response)
+          
           if (!response.ok) {
             throw new Error('Errore nella richiesta');
           }else{
             const data = await response.json();
-            setUserData(data.logged_in_as[1])
+            setUserData(data)
+            console.log('api/dashboard data: ', data)
+
           }
   
         } catch (error) {
@@ -46,14 +48,15 @@ export default function Dashboard() {
     <> 
     <section id="signup" className="bg-dark" style={{ minHeight: '100vh'}}>
       <div className="container py-5">
-
+      
         <div className="text-center mb-5">
           <p className="text-white fw-bolder fs-1">This is the dashboard</p>
         </div>
-        {console.log(userData)}
+        
         <div>
+          <p className="text-white fw-lighter fs-4">Welcome  <strong>{userData? userData.logged_in_as[0]: null}</strong></p>
           {userData ? (
-            userData.map((el, index) => <li key={index} style={{ color: 'white' }}>{el}</li>)
+            userData.logged_in_as[1].map((el, index) => <li key={index} style={{ color: 'white' }}>{el}</li>)
           ) : null}
         </div>
 

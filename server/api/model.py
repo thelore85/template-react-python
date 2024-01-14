@@ -122,12 +122,12 @@ class ProPage(db.Model):
 class ProService(db.Model):
     __tablename__ = 'pro_service'
     id = db.Column(db.Integer, primary_key=True)
-    price = db.Column(db.Integer, nullable=False)
     visit_type = db.Column(db.String(100), nullable=True)
     visit_duration = db.Column(db.Integer, nullable=True)
     day_of_week = db.Column(db.String(20), nullable=False)
     start_time = db.Column(db.String(20), nullable=False)
     end_time = db.Column(db.String(20), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     
     pro_id = db.Column(db.Integer, db.ForeignKey('pro.id'), nullable=False)
     pro = db.relationship(Pro)
@@ -157,7 +157,6 @@ class ProService(db.Model):
             "end_time": str(self.end_time)
         }
         return serialized_pro_service
-
 
 
 class Booking(db.Model):

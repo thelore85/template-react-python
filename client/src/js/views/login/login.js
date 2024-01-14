@@ -1,27 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate} from 'react-router-dom'
+import { Context } from "../../store/GlobalContext";
 
 
 export default function Login() {
 
   const navigate = useNavigate()
-  const [username, setUsername] = useState()
+
+  const {store, actions} = useContext(Context)
+  const [email, setEmail] = useState()
   const [password, setPassword] = useState()
 
 
   const handleClick = async () => {
+
     const url = process.env.BACK_URL + "/api/login";
     const options = {
       method: "POST",
-      body: JSON.stringify({username, password}),
+      body: JSON.stringify({email, password}),
       headers: { "Content-Type": "application/json"}
     }
 
     const response = await fetch(url, options);
     if (response.ok) {
         const data = await response.json();
-        localStorage.setItem("token", data.access_token);
-        console.log("data: ", data)
+        actions.setLogin(data)
         navigate("/dashboard");
     }
 
@@ -45,16 +48,16 @@ export default function Login() {
 
               <div className="col-12">
                 <label htmlFor="email" className="form-label">Email</label>
-                <input type="email" className="form-control" id="email" placeholder="you@example.com" onChange={(e) => setUsername(e.target.value)}/>
+                <input type="email" className="form-control" id="email" placeholder="you@example.com" onChange={(e) => setEmail(e.target.value)}/>
                 <div className="invalid-feedback">
                   Please enter a valid email address for shipping updates.
                 </div>
               </div>
 
               <div className="col-12 mb-3">
-                <label htmlFor="username" className="form-label">Password</label>
+                <label htmlFor="email" className="form-label">Password</label>
                 <div className="input-group has-validation">
-                  <input type="text" className="form-control" id="username" placeholder="*******"  onChange={(e) => setPassword(e.target.value)} />
+                  <input type="text" className="form-control" id="email" placeholder="*******"  onChange={(e) => setPassword(e.target.value)} />
                   <span className="input-group-text">@</span>
                   <div className="invalid-feedback">
                     Password required

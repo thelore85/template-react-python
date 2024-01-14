@@ -3,7 +3,7 @@
 ###########################################
 
 import os
-from flask import Flask, jsonify, request, Blueprint
+from flask import Flask, jsonify, request # Blueprint
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -11,13 +11,13 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 
 # file link
 from api.admin import setup_admin
-from api.model import db, User, Pro
+from api.model import db, User, Pro, ProService
 
 
 # Flask configuration
 app = Flask(__name__)
-api = Blueprint('api', __name__)
 CORS(app)  # Allow CORS requests to this API
+# api = Blueprint('api', __name__)
 
 port = 2001
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
@@ -33,7 +33,7 @@ setup_admin(app)
 # End points
 ##########################################################
 
-# START Checking router connection
+# START - Checking router connection
 @app.route("/api/", methods=['GET', 'POST'])
 def hello_world():
     response_body = {}
@@ -41,20 +41,23 @@ def hello_world():
     return response_body, 200
 
 
-# LOGIN authentication - token generation
+# LOGIN - authentication - token generation
 @app.route("/api/login", methods=['POST'])
 def login():
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
+    email = request.json.get("email")
+    password = request.json.get("password")
 
-    if username != "test@test.it" or password != "test":
-        return jsonify({"msg": "Bad username or password"}), 401
+    pro = Pro.query.filter_by(email=email, password = password).first()
     
-    access_token = create_access_token(identity=[username, ['patiente1', 'pateient2','patient3'], True])
-    return jsonify(access_token=access_token)
+    if pro:
+        print('api/logig: pro exist')
+        access_token = create_access_token(identity=[email, ['patiente1', 'pateient2','patient3'], True])
+        return jsonify(access_token=access_token)
+    
+    return jsonify({"msg": "Bad username or password"}), 401
 
 
-# DASHBOARD get user data to show in the dashboard
+# DASHBOARD - get user data to show in the dashboard
 @app.route("/api/dashboard", methods=["GET"])
 @jwt_required()
 def get_pro_dashboard():  
@@ -65,16 +68,27 @@ def get_pro_dashboard():
 # SIGNUP
 @app.route("/api/signup", methods=['POST'])
 def signup():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
+    email = request.json.get("email", None) #
+    password = request.json.get("password", None) #
+    name = request.json.get("name", None) #
+    last_name = request.json.get("lastName", None) #
+    phone = request.json.get("phone", None) #
+
+    specializations = request.json.get("specializations", None) 
+    services = request.json.get("services", None)
+    city = request.json.get("city", None)
+    country = request.json.get("country", None)
+    address = request.json.get("address", None)
+    studioUrl = request.json.get("studioUrl", None)
 
     # Verify pro exist
     existing_pro = Pro.query.filter_by(email=email).first()
     if existing_pro:
         return jsonify({"message": "Username already exists"}), 400
 
-    # Create new pro
-    new_pro = Pro(email=email, password=password)
+    # Create tables data
+    new_pro = Pro(email=email, password=password, name = name, last_name = last_name, phone = phone)
+    new_pro_service = ProService()
 
     # Add pro to the table
     db.session.add(new_pro)
@@ -83,19 +97,7 @@ def signup():
     return jsonify({"message": "User registered successfully"}), 201
 
 
-# PATIENT get detail of a specific patient
-@app.route('/api/patient/<int:patient_id>', methods=['GET'])
-@jwt_required()
-def get_pro_patient(patient_id):
-    print(patient_id)
 
-    return jsonify("response ok")
-
-    # current_user = get_jwt_identity()
-    # if current_user:
-    #     return current_user.id, 200
-    
-    # return 'no data',400
 
 
 ##########################################################
