@@ -11,10 +11,10 @@ export default function Home() {
 
   return (
     <> 
-    <section className="bg-black" style={{ minHeight: '100vh'}}>
+    <section className="bg-black" style={{ minHeight: '80vh'}}>
       <div className="container">
 
-        <div className="text-center py-4" style={{ minHeight: '95vh'}}>
+        <div className="text-center py-4">
           <img className="" style={{width:"100%", maxWidth:"500px"}}  src={starwars}></img>
           <div className="text-center">
             <p className="small text-white">Scroll Down</p>

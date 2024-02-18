@@ -11,6 +11,7 @@ holidays = "*"
 flask-admin = "*"
 flask-jwt-extended = "*"
 flask-cors = "*"
+flask-slack = "*"
 
 [dev-packages]
 
@@ -18,7 +19,6 @@ flask-cors = "*"
 python_version = "3.12"
 
 [scripts]
-start = "flask run -p 2001 -h 0.0.0.0"
 init = "flask db init"
 migrate = "flask db migrate"
 upgrade = "flask db upgrade"

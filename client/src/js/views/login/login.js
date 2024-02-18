@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate} from 'react-router-dom'
+import { useNavigate, Link} from 'react-router-dom'
 import { Context } from "../../store/GlobalContext";
 
 
@@ -12,7 +12,7 @@ export default function Login() {
   const [password, setPassword] = useState()
 
 
-  const handleClick = async () => {
+  const handleSubmit = async () => {
 
     const url = process.env.BACK_URL + "/api/login";
     const options = {
@@ -42,11 +42,11 @@ export default function Login() {
         </div>
 
         <div className="col-md-7 col-lg-8 m-auto text-white">
-          <form className="needs-validation" noValidate="">
+          <form onSubmit={handleSubmit} className="needs-validation mb-3" noValidate="">
             <hr className="my-4" />
         
 
-              <div className="col-12">
+              <div className="col-12 mb-3">
                 <label htmlFor="email" className="form-label">Email</label>
                 <input type="email" className="form-control" id="email" placeholder="you@example.com" onChange={(e) => setEmail(e.target.value)}/>
                 <div className="invalid-feedback">
@@ -66,9 +66,13 @@ export default function Login() {
               </div>
 
             <hr className="my-4" />
-            <button className="w-100 btn btn-primary btn-lg mt-5" onClick={handleClick} >Submit</button>
+            <input type='submit' value="submit" className="w-100 btn btn-primary btn-lg mt-5" />
 
           </form>
+
+          <div>
+            <span>No an account yet? <Link to="/signup">Signup here</Link></span>
+          </div>
         </div>
 
       </div>
