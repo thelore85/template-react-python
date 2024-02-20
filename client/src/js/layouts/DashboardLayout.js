@@ -1,6 +1,6 @@
 import React from 'react'
-import NavDashboard from '../component/NavDashboard'
-import Footer from '../component/Footer'
+import NavDashboard from './components/navigation/NavDashboard'
+import Footer from './components/Footer'
 
 export default function DashboardLayout({children}) {
   return (

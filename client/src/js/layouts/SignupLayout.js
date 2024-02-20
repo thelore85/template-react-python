@@ -1,6 +1,6 @@
 import React from 'react'
-import NavLogo from '../component/NavLogo'
-import Footer from '../component/Footer'
+import NavLogo from './components/navigation/NavLogo'
+import Footer from './components/Footer'
 
 
 export default function SignupLayout({children}) {

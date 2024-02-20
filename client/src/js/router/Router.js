@@ -2,21 +2,21 @@ import React from "react";
 import { HashRouter as ReactRouter, Route, Routes } from "react-router-dom"; // in prod import BrowserRouter instead of HashRouter
 
 // Layout
-import DashboardLayout from "../layout/DashboardLayout";
-import NavbarLayout from "../layout/NavbarLayout";
-import SignupLayout from "../layout/SignupLayout";
+import DashboardLayout from "../layouts/DashboardLayout";
+import NavbarLayout from "../layouts/NavbarLayout";
+import SignupLayout from "../layouts/SignupLayout";
 
 // Views
-import Home from "../views/Home";
-import Login from "../views/login/login.js";
-import Signup from "../views/login/Signup";
+import Home from "../pages/home/Home";
+import Login from "../pages/login/login.js";
+import Signup from "../pages/login/Signup";
 
 
-import Dashboard from "../views/dashboard/Dashboard.js";
-import File404 from "../views/File404";
+import Dashboard from "../pages/dashboard/Dashboard.js";
+import File404 from "../pages/404/File404";
 
 // Components
-import ScrollToTop from "../component/ScrollToTop";
+import ScrollToTop from "./ScrollToTop";
 import { GlobalContext } from "../store/GlobalContext";
 
 export default function Router() {

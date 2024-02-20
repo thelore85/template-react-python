@@ -1,5 +1,5 @@
 import React from 'react'
-import starwars from '../../img/starwars.jpeg'
+import starwars from '../../../img/starwars.jpeg'
 
 export default function File404() {
   return (

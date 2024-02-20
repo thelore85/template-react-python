@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGhost } from '@fortawesome/free-solid-svg-icons'
 
 // Components
-import logo from '../../img/logo2.png';
-import { Context } from "../store/GlobalContext";
+import { Context } from "../../../store/GlobalContext";
 
 export default function Navbar() {
 
@@ -38,7 +37,7 @@ export default function Navbar() {
               <span className="mb-0 me-4">Login</span>
             </Link>
             <Link to="/signup/" className="text-decoration-none">
-              <button className="btn btn-sm btn-info text-white mb-0 me-4">New Account</button>
+              <button className="btn btn-sm btn-primary text-white mb-0 me-4">New Account</button>
             </Link>
           </div>
         )}
