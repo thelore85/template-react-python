@@ -1,15 +1,35 @@
-from flask import Blueprint, jsonify, request
+# Flask import
+from flask import Flask, Blueprint, jsonify, request
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
-from api.model import db, Pro
 
+# Bcript import
+import bcrypt
+
+# File import
+from api.model import db, Users
+
+
+############################
+# General setting
+###########################
+
+# blueprint setting
 api = Blueprint('api', __name__)
 
 
-@api.route("/", methods=['GET'])
-def hello_world():
-    return jsonify({"msg": "chech the /admin/ path"}), 201
+# Bcrypt setting for psw hashing
+password = b"super secret password"
+# Hash a password for the first time, with a randomly-generated salt
+hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+# Check that an unhashed password matches one that has previously been
+# hashed
+if bcrypt.checkpw(password, hashed):
+    print("It Matches!")
+else:
+    print("It Does not Match :(")
+
 
 
 
@@ -17,6 +37,11 @@ def hello_world():
 ##########################################################
 # End points
 ##########################################################
+
+
+@app.route("/", methods=['GET'])
+def hello_world():
+    return jsonify({"msg": "chech the /admin/ path"}), 201
 
 
 # SIGNUP
@@ -28,14 +53,14 @@ def signup():
     password = request.json.get("password", None)
 
     # Verify pro exists
-    existing_pro = Pro.query.filter_by(email=email).first()
+    existing_pro = Users.query.filter_by(email=email).first()
     if existing_pro:
         return jsonify({"message": "Not registered: user already exists"}), 401
     if email == '' or password ==  '' or user_name == '':
         return jsonify({"message": "Not registered: Invalid Email or Password"}), 401
 
     # Create record instance
-    new_pro = Pro(user_name = user_name, email = email, password = password)
+    new_pro = Users(user_name = user_name, email = email, password = password)
 
     # Add instance to the table
     db.session.add(new_pro)
@@ -53,7 +78,7 @@ def login():
     password = request.json.get("password")
 
     # Check if pro exists
-    pro = Pro.query.filter_by(email=email, password=password).first()
+    pro = Users.query.filter_by(email=email, password=password).first()
     
     if pro:
         # Define identity as a dictionary with keys and values
@@ -84,7 +109,7 @@ def pro_authentication():
 @api.route("/users", methods=["GET"])
 def get_users():
     # call db table /pro
-    users_array = Pro.query.all()
+    users_array = Users.query.all()
 
     # Serializza la lista di utenti in un formato JSON e restituiscila
     users = [{"id": user.id, "user_name": user.user_name, "email": user.email} for user in users_array]

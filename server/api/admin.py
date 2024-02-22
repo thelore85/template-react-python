@@ -1,5 +1,5 @@
 import os
-from api.model import db, Pro
+from api.model import db, Users
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
 
@@ -9,12 +9,13 @@ def setup_admin(app):
     admin = Admin(app, name='Admin panel', template_mode='bootstrap4')
 
 
-    class ProAdminView(ModelView):
-        column_list = ['id', 'user_name', 'email', 'password'] 
+    # class ProAdminView(ModelView):
+    #     column_list = ['id', 'user_name', 'email', 'password'] 
 
     
     # Admin panel views
-    admin.add_view(ProAdminView(Pro, db.session))
+    # admin.add_view(ProAdminView(Pro, db.session))
+    admin.add_view(ModelView(Users, db.session))
 
 
 

@@ -47,7 +47,7 @@ export default function Dashboard() {
           <div className="text-gray border rounded bg-light p-3 w-50">
             <h4 className="mb-3 text-decoration-underline" >Users List</h4>
             {usersList.map( user => {
-              return <p className="fw-lighter"><span className="fw-normal">{user.user_name}</span></p>
+              return <p key={user.id} className="fw-lighter"><span className="fw-normal">{user.user_name}</span></p>
             })}
           </div>
         </div>

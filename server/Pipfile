@@ -10,6 +10,8 @@ flask-migrate = "*"
 flask-admin = "*"
 flask-jwt-extended = "*"
 flask-cors = "*"
+sqlalchemy = "==1.4.46"
+bcrypt = "*"
 
 [dev-packages]
 

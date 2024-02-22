@@ -10,8 +10,8 @@ export default function Login() {
   const navigate = useNavigate()
 
   const {store, actions} = useContext(Context)
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
 
