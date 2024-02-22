@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGhost } from '@fortawesome/free-solid-svg-icons'
+import { Context } from "../../../store/appContext";
 
 // Components
-import { Context } from "../../../store/GlobalContext";
 
 export default function NavLogo() {
 

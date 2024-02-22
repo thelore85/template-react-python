@@ -1,65 +1,60 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState,} from "react";
+import { Context } from "../../store/appContext";
+import { useNavigate } from "react-router";
+
 
 export default function Dashboard() {
 
-    const [userData, setUserData] = useState()
-    
+  const {store, actions} = useContext(Context) 
+  const navigate = useNavigate()
+
+  const [usersList, setUsersList] = useState([])
 
     useEffect(() => {
 
+      // Authenticate user
+      const fetchAuthentication = async () => {
+        const auth = await actions.authentication()
+        if(!auth){ navigate("/") }
+      }
+      fetchAuthentication()
+
       const fetchData = async () => {
-        try {
-          const url = process.env.BACK_URL + "/api/dashboard";
-          const token = localStorage.getItem('token');
+        const users = await actions.getUsers()
+        setUsersList(users)
+      }
+      fetchData()
 
-          const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            },
-          });
-
-          console.log('api/dashboard response: ', response)
-          
-          if (!response.ok) {
-            throw new Error('Errore nella richiesta');
-          }else{
-            const data = await response.json();
-            setUserData(data)
-            console.log('api/dashboard data: ', data)
-
-          }
-  
-        } catch (error) {
-          console.error('Errore:', error.message);
-        }
-      };
-  
-      fetchData();
 
     }, []);
-  
 
   return (
     <> 
-    <section id="signup" className="bg-dark" style={{ minHeight: '100vh'}}>
+    <main id="signup" className="bg-dark" style={{ minHeight: '100vh'}}>
       <div className="container py-5">
       
-        <div className="text-center mb-5">
-          <p className="text-white fw-bolder fs-1">This is the dashboard</p>
+        <div className="mb-5">
+          <h1 className="text-white fw-bolder fs-1">Dashboard</h1>
+        </div>
+
+        <div className="d-flex">
+          <div className="text-gray border rounded bg-light p-3 w-50 me-3 h-auto">
+            <h4 className="mb-3 text-decoration-underline" >My data</h4>
+            <p className="fw-lighter"> Username - <span className="fw-normal">{store.user.user_name}</span></p>
+            <p className="fw-lighter mb-0"> Email - <span className="fw-normal">{store.user.email}</span></p>
+          </div>
+
+          <div className="text-gray border rounded bg-light p-3 w-50">
+            <h4 className="mb-3 text-decoration-underline" >Users List</h4>
+            {usersList.map( user => {
+              return <p className="fw-lighter"><span className="fw-normal">{user.user_name}</span></p>
+            })}
+          </div>
         </div>
         
-        <div>
-          <p className="text-white fw-lighter fs-4">Welcome  <strong>{userData? userData.logged_in_as[0]: null}</strong></p>
-          {userData ? (
-            userData.logged_in_as[1].map((el, index) => <li key={index} style={{ color: 'white' }}>{el}</li>)
-          ) : null}
-        </div>
-
 
       </div>
-    </section>
+    </main>
     
     </>
   )

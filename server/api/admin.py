@@ -10,7 +10,7 @@ def setup_admin(app):
 
 
     class ProAdminView(ModelView):
-        column_list = ['id', 'email', 'password'] 
+        column_list = ['id', 'user_name', 'email', 'password'] 
 
     
     # Admin panel views

@@ -17,13 +17,13 @@ import File404 from "../pages/404/File404";
 
 // Components
 import ScrollToTop from "./ScrollToTop";
-import { GlobalContext } from "../store/GlobalContext";
+import injectContext from "../store/appContext.js"
 
-export default function Router() {
+const Router = () => {
   const basename = process.env.BASENAME || "/";
 
   return (
-    <GlobalContext>
+
         <ReactRouter basename={basename}>
 
           <ScrollToTop>
@@ -48,6 +48,7 @@ export default function Router() {
           </ScrollToTop>
 
         </ReactRouter>
-    </GlobalContext>
   );
 }
+
+export default injectContext(Router);

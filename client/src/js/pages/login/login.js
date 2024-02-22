@@ -1,6 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, Link} from 'react-router-dom'
-import { Context } from "../../store/GlobalContext";
+import { Context } from "../../store/appContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Login() {
@@ -10,28 +12,37 @@ export default function Login() {
   const {store, actions} = useContext(Context)
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const [showPassword, setShowPassword] = useState(false)
 
 
-  const handleSubmit = async () => {
-
-    const url = process.env.BACK_URL + "/api/login";
-    const options = {
-      method: "POST",
-      body: JSON.stringify({email, password}),
-      headers: { "Content-Type": "application/json"}
+  useEffect(() => {
+    // Authenticate user
+    const fetchAuthentication = async () => {
+      const auth = await actions.authentication()
+      if(auth){ navigate("/dashboard") }
     }
+    fetchAuthentication()
+  }, [store.login]);
 
-    const response = await fetch(url, options);
-    if (response.ok) {
-        const data = await response.json();
-        actions.setLogin(data)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try{
+      const validUser = await actions.login(email, password);
+      if (validUser) {
         navigate("/dashboard");
+      } else {
+        alert('Impossible to login: try another email or password');
+      }
+    }catch(error){
+      console.error('login error: ', error)
     }
+  };
+  
 
-    console.log(response.status, response.statusText)
-  }
 
-
+  
   return (
     <> 
     <section id="signup" className="bg-dark" style={{ minHeight: '100vh'}}>
@@ -49,19 +60,15 @@ export default function Login() {
               <div className="col-12 mb-3">
                 <label htmlFor="email" className="form-label">Email</label>
                 <input type="email" className="form-control" id="email" placeholder="you@example.com" onChange={(e) => setEmail(e.target.value)}/>
-                <div className="invalid-feedback">
-                  Please enter a valid email address for shipping updates.
-                </div>
               </div>
 
               <div className="col-12 mb-3">
-                <label htmlFor="email" className="form-label">Password</label>
+                <label htmlFor="password" className="form-label">Password</label>
                 <div className="input-group has-validation">
-                  <input type="text" className="form-control" id="email" placeholder="*******"  onChange={(e) => setPassword(e.target.value)} />
-                  <span className="input-group-text">@</span>
-                  <div className="invalid-feedback">
-                    Password required
-                  </div>
+                  <input type={ !showPassword ? "password" : "text"} className="form-control" id="password" placeholder="*******" required="" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                  <span className="input-group-text" onClick={() => setShowPassword(!showPassword)}>
+                    { !showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+                  </span>
                 </div>
               </div>
 

@@ -66,14 +66,10 @@ h1,h2,h3,h4,h5 {
   text-transform: capitalize;
   color: var(--on-background);
   font-weight: 700;
-  margin-bottom: 30px;
 }
-
-p {margin-bottom: 30px;}
 
 a{
   color: var(--primary);
-  font-weight: 400;
   text-decoration: none;
 }
 
@@ -119,5 +115,9 @@ a:hover{
 }
 
 .text-gray{
-  color: rgb(166, 166, 166)
+  color: rgb(97, 97, 97)
+}
+
+.w-33{
+  width:33%;
 }
