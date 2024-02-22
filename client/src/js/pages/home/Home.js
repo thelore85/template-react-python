@@ -35,6 +35,7 @@ export default function Home() {
               <li>React Router</li>
               <li>JWT</li>
               <li>SQLight DB</li>
+              <li>Bcrypt</li>
             </ul>
           </div>
 

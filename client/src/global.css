@@ -7,6 +7,7 @@ COLOR SISTEM
 
 :root {
   --primary: #d60981;
+  --primary-subtle: #8c205f;
   --primary-hover: #b81976;
   --on-primary: rgb(250, 250, 250);
 
@@ -91,6 +92,10 @@ a:hover{
 
 .btn-primary{
   background-color: var(--primary);
+  color: var(--on-primary);
+}
+.btn-primary:disabled{
+  background-color: var(--primary-subtle);
   color: var(--on-primary);
 }
 

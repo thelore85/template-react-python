@@ -39,7 +39,7 @@ else:
 ##########################################################
 
 
-@app.route("/", methods=['GET'])
+@api.route("/", methods=['GET'])
 def hello_world():
     return jsonify({"msg": "chech the /admin/ path"}), 201
 
@@ -51,16 +51,24 @@ def signup():
     user_name = request.json.get("userName", None) 
     email = request.json.get("email", None) 
     password = request.json.get("password", None)
+    password_bytes = password.encode('utf-8') if password is not None else None #conver string in byte string
+    hashed = bcrypt.hashpw(password_bytes, bcrypt.gensalt())
+
 
     # Verify pro exists
     existing_pro = Users.query.filter_by(email=email).first()
     if existing_pro:
         return jsonify({"message": "Not registered: user already exists"}), 401
+    
     if email == '' or password ==  '' or user_name == '':
         return jsonify({"message": "Not registered: Invalid Email or Password"}), 401
+    
+    if len(password) < 6:
+        return jsonify({"message": "Password must be at least 6 characters long"}), 401
+    
 
     # Create record instance
-    new_pro = Users(user_name = user_name, email = email, password = password)
+    new_pro = Users(user_name = user_name, email = email, password = hashed)
 
     # Add instance to the table
     db.session.add(new_pro)
@@ -76,11 +84,14 @@ def signup():
 def login():
     email = request.json.get("email")
     password = request.json.get("password")
+    password_bytes = password.encode('utf-8') if password is not None else None #conver string in byte string
+
 
     # Check if pro exists
-    pro = Users.query.filter_by(email=email, password=password).first()
-    
-    if pro:
+    pro = Users.query.filter_by(email=email).first()
+
+    #check if psw match    
+    if pro and bcrypt.checkpw(password_bytes, pro.password):
         # Define identity as a dictionary with keys and values
         identity = {
             "id": pro.id,

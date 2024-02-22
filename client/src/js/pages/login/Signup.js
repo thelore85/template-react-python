@@ -12,8 +12,11 @@ export default function SignupPersonalData() {
 
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+
   const [showPassword, setShowPassword] = useState(false)
+  const [password, setPassword] = useState('')
+  const [passwordError, setPasswordError] = useState("");
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -25,12 +28,25 @@ export default function SignupPersonalData() {
         console.log('response: ', signup)
         navigate('/login')  
       }else{
-        alert('impossible to register a new user')
+        alert('Signup faild, try with other email or password')
       }
     }catch(error){
       console.error('signup error: ', error)
     }
   }
+
+  const handlePassword = (e) => {
+    const newPassword = e.target.value; 
+
+    setPassword(newPassword); 
+
+    if(newPassword.length < 6){
+        setPasswordError("Password must be at least 6 characters long");
+    } else {
+        setPasswordError('');
+    }
+}
+
 
 
   return (
@@ -59,15 +75,20 @@ export default function SignupPersonalData() {
               <div className="col-12 mb-3">
                 <label htmlFor="password" className="form-label">Password</label>
                 <div className="input-group has-validation">
-                  <input type={ !showPassword ? "password" : "text"} className="form-control" id="password" placeholder="*******" required="" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                  <input type={ !showPassword ? "password" : "text"} className="form-control" id="password" placeholder="*******" required="" value={password} onChange={handlePassword}/>
                   <span className="input-group-text" onClick={() => setShowPassword(!showPassword)}>
                     { !showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
                   </span>
                 </div>
+                {passwordError && <div className="text-danger mt-1">{passwordError}</div>}
               </div>
 
             <hr className="my-4" />
-            <input type='submit' value="submit" className="w-100 btn btn-primary btn-lg mt-5" />
+            <input 
+              type='submit' 
+              value="submit" 
+              className="w-100 btn btn-primary btn-lg mt-5" 
+              disabled={ passwordError.length > 0 && userName.length > 0 && email.includes("@") ? false : true } />
             
           </form>
 

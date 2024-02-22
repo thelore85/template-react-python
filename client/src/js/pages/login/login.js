@@ -78,7 +78,7 @@ export default function Login() {
           </form>
 
           <div>
-            <span>No an account yet? <Link to="/signup">Signup here</Link></span>
+            <span>No account yet? <Link to="/signup">Signup here</Link></span>
           </div>
         </div>
 
