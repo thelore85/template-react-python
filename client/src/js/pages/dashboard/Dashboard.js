@@ -11,7 +11,6 @@ export default function Dashboard() {
   const [usersList, setUsersList] = useState([])
 
     useEffect(() => {
-
       // Authenticate user
       const fetchAuthentication = async () => {
         const auth = await actions.authentication()
@@ -24,9 +23,11 @@ export default function Dashboard() {
         setUsersList(users)
       }
       fetchData()
-
-
     }, []);
+
+    const handleChangePassword = () => {
+      
+    }
 
   return (
     <> 
@@ -41,7 +42,10 @@ export default function Dashboard() {
           <div className="text-gray border rounded bg-light p-3 w-50 me-3 h-auto">
             <h4 className="mb-3 text-decoration-underline" >My data</h4>
             <p className="fw-lighter"> Username - <span className="fw-normal">{store.user.user_name}</span></p>
-            <p className="fw-lighter mb-0"> Email - <span className="fw-normal">{store.user.email}</span></p>
+            <p className="fw-lighter"> Email - <span className="fw-normal">{store.user.email}</span></p>
+            <div className="d-flex">
+              <button className="btn-sm btn-light border" onClick={handleChangePassword}>Change psw</button>
+            </div>
           </div>
 
           <div className="text-gray border rounded bg-light p-3 w-50">

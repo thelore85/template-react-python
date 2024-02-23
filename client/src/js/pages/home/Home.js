@@ -31,11 +31,12 @@ export default function Home() {
               <li>Python</li>
               <li>Flask</li>
               <li>SQLAlchemy</li>
-              <li>Flux</li>
+              <li>Flux - server</li>
               <li>React Router</li>
-              <li>JWT</li>
+              <li>JWT - auth manager</li>
               <li>SQLight DB</li>
-              <li>Bcrypt</li>
+              <li>Bcrypt - psw hashing</li>
+              <li>Smtplib - email sender</li>
             </ul>
           </div>
 
@@ -46,6 +47,7 @@ export default function Home() {
               <li>Login/Logout</li>
               <li>Dashboard</li>
               <li>PSW encription</li>
+              <li>Password recovery</li>
             </ul>
           </div>
 

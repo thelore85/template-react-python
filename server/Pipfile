@@ -12,6 +12,8 @@ flask-jwt-extended = "*"
 flask-cors = "*"
 sqlalchemy = "==1.4.46"
 bcrypt = "*"
+flask-mail = "*"
+pyjwt = "*"
 
 [dev-packages]
 

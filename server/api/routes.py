@@ -1,14 +1,21 @@
 # Flask import
-from flask import Flask, Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
+
+
+
+
 # Bcript import
 import bcrypt
+import jwt
+import os
 
 # File import
 from api.model import db, Users
+from api.email_utility import send_recovery_email
 
 
 ############################
@@ -19,24 +26,54 @@ from api.model import db, Users
 api = Blueprint('api', __name__)
 
 
-# Bcrypt setting for psw hashing
-password = b"super secret password"
-# Hash a password for the first time, with a randomly-generated salt
-hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-# Check that an unhashed password matches one that has previously been
-# hashed
-if bcrypt.checkpw(password, hashed):
-    print("It Matches!")
-else:
-    print("It Does not Match :(")
-
-
-
-
 
 ##########################################################
 # End points
 ##########################################################
+
+
+@api.route('/verify-reset-token', methods=['POST'])
+def verify_reset_token_endpoint():
+    token = request.json.get('token')  # Assicurati che il token sia passato nel corpo della richiesta
+    
+    if not token:
+        return jsonify({"error": "Token non fornito"}), 400
+
+    try:
+        payload = jwt.decode(token, key=os.getenv('SECRET_KEY_FLASK'), algorithms=["HS256"])
+        user_name = payload.get('user_name')
+
+        if user_name:
+            user = Users.query.filter_by(user_name=user_name).first()
+
+            if user:
+                # Restituisci i dettagli dell'utente trovato
+                return jsonify({"user": user.serialize()}), 200
+            else:
+                return jsonify({"error": "Utente non trovato"}), 404
+        else:
+            return jsonify({"error": "Nome utente non presente nel token"}), 400
+
+    except jwt.ExpiredSignatureError:
+        return jsonify({"error": "Il token è scaduto"}), 400
+    except jwt.InvalidTokenError:
+        return jsonify({"error": "Token non valido"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+# Reset Psw: email recovery delivery
+@api.route('/recovery-email', methods=['POST'])
+def email_endpoint():
+    email = request.json.get('email') 
+    user = Users.query.filter_by(email = email).first()
+    if user:
+        send_recovery_email(user)
+        return 'Email sent successfully', 200
+    else:
+        return 'Invalid email provided', 400
+
 
 
 @api.route("/", methods=['GET'])
@@ -116,7 +153,8 @@ def pro_authentication():
         return jsonify(current_user)
     
 
-# User List - get all users
+
+# GET USER LIST - get all users
 @api.route("/users", methods=["GET"])
 def get_users():
     # call db table /pro

@@ -79,6 +79,10 @@ a:hover{
   text-decoration: underline;
 }
 
+p{
+  margin-bottom: 0;
+}
+
 
 
 /* /////////////////////////// */
@@ -126,3 +130,4 @@ a:hover{
 .w-33{
   width:33%;
 }
+

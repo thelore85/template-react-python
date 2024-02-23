@@ -6,12 +6,12 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import NavbarLayout from "../layouts/NavbarLayout";
 import SignupLayout from "../layouts/SignupLayout";
 
-// Views
+// Pages
 import Home from "../pages/home/Home";
 import Login from "../pages/login/login.js";
 import Signup from "../pages/login/Signup";
-
-
+import PasswordRequest from "../pages/login/PasswordRequest.js";
+import PasswordSetting from "../pages/login/PasswordSetting.js";
 import Dashboard from "../pages/dashboard/Dashboard.js";
 import File404 from "../pages/404/File404";
 
@@ -36,6 +36,8 @@ const Router = () => {
               {/* SIGNUP */}
               <Route path="/login/" element={<SignupLayout><Login /></SignupLayout>} />
               <Route path="/signup/" element={<SignupLayout><Signup /></SignupLayout>} />
+              <Route path="/password-request/" element={<SignupLayout><PasswordRequest /></SignupLayout>} />
+              <Route path="/password-setting/:token" element={<SignupLayout><PasswordSetting /></SignupLayout>} />
 
             
               {/* DASHBOARD */}

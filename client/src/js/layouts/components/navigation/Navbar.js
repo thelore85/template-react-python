@@ -2,12 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGhost } from '@fortawesome/free-solid-svg-icons'
-import { Context } from "../../../store/appContext";
 
 
 export default function Navbar() {
-  const {store, actions} = useContext(Context)
-
 
   return (
     <nav className="bg-white text-black sticky-top shadow">

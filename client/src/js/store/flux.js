@@ -31,6 +31,7 @@ const getState = ({getStore, getActions, setStore}) => {
         }
       },
 
+
       /////////////////////////////
       // AUTHENTICATION AND LOGIN
 
@@ -45,9 +46,9 @@ const getState = ({getStore, getActions, setStore}) => {
         const response = await fetch(url, options);
       
         if (response.ok) {
-          const data = await response.json();
-          setToken(data); 
-          return data
+          const token = await response.json();
+          setToken(token); 
+          return token
         }
         
         if(!response.ok){
@@ -55,9 +56,9 @@ const getState = ({getStore, getActions, setStore}) => {
         }
       },
       
-      setToken: (data) => {
+      setToken: (token) => {
         setStore({ login: true })
-        localStorage.setItem("token", data.access_token)
+        localStorage.setItem("token", token.access_token)
       },
       
 			logout: () => {
@@ -100,7 +101,7 @@ const getState = ({getStore, getActions, setStore}) => {
           setStore({ login: true, user: data });
           return data;
         } else {
-          setStore({ login: false });
+          setStore({ login: false, user: {} });
           return null;
         }
       },

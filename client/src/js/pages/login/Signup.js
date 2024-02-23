@@ -87,13 +87,13 @@ export default function SignupPersonalData() {
             <input 
               type='submit' 
               value="submit" 
-              className="w-100 btn btn-primary btn-lg mt-5" 
-              disabled={ passwordError.length > 0 && userName.length > 0 && email.includes("@") ? false : true } />
+              className="w-100 btn btn-primary btn-lg mt-5"
+              disabled={ passwordError.length != 0 || password.length === 0 || userName.length === 0 || !email.includes("@") ? true : false } />
             
           </form>
 
           <div>
-            <span>Do you already have an account? <Link to="/login">Login here</Link></span>
+            <span>Already have an account? <Link to="/login">Login here</Link></span>
           </div>
         </div>
 

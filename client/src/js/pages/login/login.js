@@ -27,17 +27,13 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    try{
-      const validUser = await actions.login(email, password);
-      if (validUser) {
-        navigate("/dashboard");
-      } else {
-        alert('Impossible to login: try another email or password');
-      }
-    }catch(error){
-      console.error('login error: ', error)
-    }
+    
+    const validUser = await actions.login(email, password);
+    if (validUser) {
+      navigate("/dashboard");
+    } else {
+      alert('Impossible to login: try another email or password');
+    }      
   };
   
 
@@ -78,7 +74,8 @@ export default function Login() {
           </form>
 
           <div>
-            <span>No account yet? <Link to="/signup">Signup here</Link></span>
+            <span className="d-block">No account yet? <Link to="/signup">Signup here</Link></span>
+            <span>Forgot your password? <Link to="/password-request">Recovery now</Link></span>
           </div>
         </div>
 
