@@ -21,15 +21,14 @@ class Users(db.Model):
             raise ValueError("SECRET_KEY_FLASK not set correctly")
 
         # Generate temporary token for psw reset
-        token = jwt.encode({'reset_password': self.user_name, 'exp': time() + expires}, key=secret_key)
+        token = jwt.encode({'email': self.email, 'reset_password': self.user_name, 'exp': time() + expires}, key=secret_key)
         return token
     
-    def serialize(self):
+    def serialized(self):
         return {
-            "id": self.id, 
-            "user_name": self.user_name,  
-            "email": self.email, 
-            "password": self.password,
+            'id': self.id,
+            'user_name': self.user_name,
+            'email': self.email
         }
     
     def __repr__(self):

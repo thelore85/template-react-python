@@ -74,8 +74,8 @@ export default function Login() {
           </form>
 
           <div>
-            <span className="d-block">No account yet? <Link to="/signup">Signup here</Link></span>
-            <span>Forgot your password? <Link to="/password-request">Recovery now</Link></span>
+            <p className="mb-2">No account yet? <Link to="/signup">Signup here</Link></p>
+            <p>Forgot your password? <Link to="/password-request">Recovery now</Link></p>
           </div>
         </div>
 

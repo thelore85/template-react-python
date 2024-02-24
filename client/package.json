@@ -35,8 +35,8 @@
     "style-loader": "^3.3.3",
     "svg-url-loader": "^8.0.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1",
-    "dotenv-webpack": "^7.0.3"
+    "webpack-dev-server": "^5.0.2",
+    "dotenv-webpack": "^8.0.1"
   },
   "now": {
     "builds": [ { "src": "webpack.config.js", "use": "@now/static-build" }]

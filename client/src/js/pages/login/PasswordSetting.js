@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link, useParams} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash, faClose} from '@fortawesome/free-solid-svg-icons'
@@ -13,45 +13,73 @@ export default function PasswordSetting() {
   const [showSuccess, setShowSuccess] = useState(false)
   const [showError, setShowError] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [userEmail, setUserEmail] = useState('')
+  
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      const userData = await verifyToken(token)
+      setUserEmail(userData.email)
+    }
+    fetchData()
+  },[])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setShowError(false);
     setShowSuccess(false);
-    await fetchNewPasswordVerification(token);
+    changePassword(userEmail, newPassword)
+    console.log("user data", userEmail, newPassword)
   };
-  
-  const fetchNewPasswordVerification = async (token) => {
+
+
+  const verifyToken = async (token) => {
     const url = `${process.env.BACK_URL}/api/verify-reset-token`;
     const options = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+       },
       body: JSON.stringify({token})
     };
   
-    try {
-      const response = await fetch(url, options);
-      if (response.ok) {
-        setShowSuccess(true);
-        const data = await response.json();
-        console.log('Password reset data: ', data);
-      } else {
-        setShowError(true);
-      }
-    } catch (error) {
-      console.error('Error while fetching password reset:', error);
-      setShowError(true);
+    const response = await fetch(url, options);
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Password reset data: ', data);
+      return data
+    } else {
+      alert('token link invalid or expired')
+      navigate('/')
+      return ''
     }
   };
   
-
-
-
-
-  // Ora token contiene il valore del parametro :token dall'URL
-
-
   
+  const changePassword = async (email, password) => {
+    const url = process.env.BACK_URL + '/api/new-password';
+    const options={
+      method:'PUT',
+      headers: {"Content-Type":"application/json", Authorization: `Bearer ${token}`,},
+      body: JSON.stringify({email, password})
+    }
+    
+    const response = await fetch(url, options)
+    
+    if (response.ok) {
+      setShowSuccess(true);
+      setTimeout(function() {
+          navigate("/login");
+      }, 5000);
+  }
+  
+      if(!response.ok){
+        setShowError(false);
+      }
+  }
+  
+
   
   return (
     <> 
@@ -80,15 +108,11 @@ export default function PasswordSetting() {
             <input type='submit' value="Change Password" className="w-100 btn btn-primary btn-lg mt-5" />
           </form>
 
-          <div>
-            <span className="d-block">No account yet? <Link to="/signup">Signup here</Link></span>
-          </div>
-
           {/* Alert message */}
           <div>
             {showSuccess ? 
               <div className="bg-success rounded p-3 mt-4 d-flex justify-content-between align-items-center w-50 " style={{ position: 'fixed', left: '50%', transform: 'translateX(-50%)', bottom: '60px', zIndex: '999' }}>
-                <p className="m-0">Check your email. A recovery link has been sent</p>
+                <p className="m-0">Password updated. Go to login page to access your account</p>
                 <span className="p-2 rounded bg-light border text-black-50" style={{ cursor: "pointer" }} onClick={() => setShowSuccess(false)}><FontAwesomeIcon icon={faClose} /></span>
               </div>
               : null

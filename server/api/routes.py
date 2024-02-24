@@ -5,9 +5,6 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
 
-
-
-
 # Bcript import
 import bcrypt
 import jwt
@@ -32,6 +29,45 @@ api = Blueprint('api', __name__)
 ##########################################################
 
 
+@api.route('/new-password', methods=['PUT'])
+def set_new_password():
+    token = request.headers.get('Authorization') # Ottenere il token dall'header Authorization
+    if not token:
+        return jsonify({"error": "Token non fornito"}), 400
+    
+    token = token.split()[1]  # Assicurati che ci siano due parti separate da spazio
+
+    try:
+        payload = jwt.decode(token, key=os.getenv('SECRET_KEY_FLASK'), algorithms=["HS256"])
+        user_email = payload.get('email')
+        
+        email = request.json.get('email')
+        new_password = request.json.get('password')
+        new_password_bytes = new_password.encode('utf-8') if new_password is not None else None # Convert string to byte string
+        
+        if user_email != email:
+            return jsonify({"error": "L'email nel token non corrisponde all'email fornita"}), 400
+        
+        user = Users.query.filter_by(email=email).first()
+        if user:
+            hashed_password = bcrypt.hashpw(new_password_bytes, bcrypt.gensalt())
+            user.password = hashed_password
+            db.session.commit()
+            return jsonify({'message': 'Password updated successfully'}), 200
+        else:
+            return jsonify({'error': 'User not found'}), 404
+
+    except jwt.ExpiredSignatureError:
+        return jsonify({"error": "Il token è scaduto"}), 400
+    except jwt.InvalidTokenError:
+        return jsonify({"error": "Token non valido"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+
+
 @api.route('/verify-reset-token', methods=['POST'])
 def verify_reset_token_endpoint():
     token = request.json.get('token')  # Assicurati che il token sia passato nel corpo della richiesta
@@ -41,18 +77,13 @@ def verify_reset_token_endpoint():
 
     try:
         payload = jwt.decode(token, key=os.getenv('SECRET_KEY_FLASK'), algorithms=["HS256"])
-        user_name = payload.get('user_name')
+        user_email = payload.get('email')
+        user = Users.query.filter_by(email=user_email).first()
 
-        if user_name:
-            user = Users.query.filter_by(user_name=user_name).first()
-
-            if user:
-                # Restituisci i dettagli dell'utente trovato
-                return jsonify({"user": user.serialize()}), 200
-            else:
-                return jsonify({"error": "Utente non trovato"}), 404
+        if user:
+            return jsonify(user.serialized()), 200
         else:
-            return jsonify({"error": "Nome utente non presente nel token"}), 400
+            return jsonify({"error": "Utente non trovato"}), 404
 
     except jwt.ExpiredSignatureError:
         return jsonify({"error": "Il token è scaduto"}), 400

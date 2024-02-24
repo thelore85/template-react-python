@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClose, faTimes, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faClose } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function PasswordRecovery() {
@@ -58,7 +58,7 @@ export default function PasswordRecovery() {
               </div>
 
             <hr className="my-4" />
-            <input type='submit' value="Change Password" className="w-100 btn btn-primary btn-lg mt-5" />
+            <input type='submit' value="Reset Password" className="w-100 btn btn-primary btn-lg mt-5" />
           </form>
 
           <div>

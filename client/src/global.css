@@ -72,6 +72,7 @@ h1,h2,h3,h4,h5 {
 a{
   color: var(--primary);
   text-decoration: none;
+  font-weight: 600;
 }
 
 a:hover{

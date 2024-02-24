@@ -1,7 +1,6 @@
 "use strict";
 
 /** @typedef {import("../index.js").IncomingMessage} IncomingMessage */
-
 /** @typedef {import("../index.js").ServerResponse} ServerResponse */
 
 /**
@@ -17,10 +16,8 @@ function ready(context, callback, req) {
     callback(context.stats);
     return;
   }
-
   const name = req && req.url || callback.name;
   context.logger.info(`wait until bundle finished${name ? `: ${name}` : ""}`);
   context.callbacks.push(callback);
 }
-
 module.exports = ready;

@@ -17,11 +17,11 @@ export default function Home() {
           <div className="col-sm-4">
             <h4 className=" fw-normal text-primary">Frontend</h4>
             <ul>
+              <li>Node</li>
               <li>React</li>
               <li>Bootstraps</li>
               <li>Font Awesome</li>
               <li>Webpack</li>
-              <li>Node</li>
             </ul>
           </div>
 
