@@ -9,11 +9,11 @@ flask-sqlalchemy = "*"
 flask-migrate = "*"
 flask-admin = "*"
 flask-jwt-extended = "*"
+pyjwt = "*"
 flask-cors = "*"
 sqlalchemy = "==1.4.46"
 bcrypt = "*"
 flask-mail = "*"
-pyjwt = "*"
 
 [dev-packages]
 

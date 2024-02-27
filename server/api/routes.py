@@ -12,7 +12,8 @@ import os
 
 # File import
 from api.model import db, Users
-from api.email_utility import send_recovery_email
+from api.services.email_utility import send_recovery_email
+from api.services.auth_utility import set_new_password, verify_reset_token, generate_reset_token
 
 
 ############################
@@ -30,68 +31,15 @@ api = Blueprint('api', __name__)
 
 
 @api.route('/new-password', methods=['PUT'])
-def set_new_password():
+def new_password_setting():
     token = request.headers.get('Authorization') # Ottenere il token dall'header Authorization
-    if not token:
-        return jsonify({"error": "Token non fornito"}), 400
-    
-    token = token.split()[1]  # Assicurati che ci siano due parti separate da spazio
-
-    try:
-        payload = jwt.decode(token, key=os.getenv('SECRET_KEY_FLASK'), algorithms=["HS256"])
-        user_email = payload.get('email')
-        
-        email = request.json.get('email')
-        new_password = request.json.get('password')
-        new_password_bytes = new_password.encode('utf-8') if new_password is not None else None # Convert string to byte string
-        
-        if user_email != email:
-            return jsonify({"error": "L'email nel token non corrisponde all'email fornita"}), 400
-        
-        user = Users.query.filter_by(email=email).first()
-        if user:
-            hashed_password = bcrypt.hashpw(new_password_bytes, bcrypt.gensalt())
-            user.password = hashed_password
-            db.session.commit()
-            return jsonify({'message': 'Password updated successfully'}), 200
-        else:
-            return jsonify({'error': 'User not found'}), 404
-
-    except jwt.ExpiredSignatureError:
-        return jsonify({"error": "Il token è scaduto"}), 400
-    except jwt.InvalidTokenError:
-        return jsonify({"error": "Token non valido"}), 400
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-
-
+    return set_new_password(token)
 
 
 @api.route('/verify-reset-token', methods=['POST'])
 def verify_reset_token_endpoint():
-    token = request.json.get('token')  # Assicurati che il token sia passato nel corpo della richiesta
-    
-    if not token:
-        return jsonify({"error": "Token non fornito"}), 400
-
-    try:
-        payload = jwt.decode(token, key=os.getenv('SECRET_KEY_FLASK'), algorithms=["HS256"])
-        user_email = payload.get('email')
-        user = Users.query.filter_by(email=user_email).first()
-
-        if user:
-            return jsonify(user.serialized()), 200
-        else:
-            return jsonify({"error": "Utente non trovato"}), 404
-
-    except jwt.ExpiredSignatureError:
-        return jsonify({"error": "Il token è scaduto"}), 400
-    except jwt.InvalidTokenError:
-        return jsonify({"error": "Token non valido"}), 400
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
+    token = request.json.get('token')
+    return verify_reset_token(token)
 
 
 # Reset Psw: email recovery delivery
@@ -100,16 +48,12 @@ def email_endpoint():
     email = request.json.get('email') 
     user = Users.query.filter_by(email = email).first()
     if user:
-        send_recovery_email(user)
+        token = generate_reset_token(user)
+        send_recovery_email(user, token)
         return 'Email sent successfully', 200
     else:
         return 'Invalid email provided', 400
 
-
-
-@api.route("/", methods=['GET'])
-def hello_world():
-    return jsonify({"msg": "chech the /admin/ path"}), 201
 
 
 # SIGNUP
@@ -146,14 +90,12 @@ def signup():
 
 
 
-
 # LOGIN - authentication - token generation
 @api.route("/login", methods=['POST'])
 def login():
     email = request.json.get("email")
     password = request.json.get("password")
     password_bytes = password.encode('utf-8') if password is not None else None #conver string in byte string
-
 
     # Check if pro exists
     pro = Users.query.filter_by(email=email).first()
@@ -179,6 +121,7 @@ def login():
 @jwt_required()
 def pro_authentication():  
     current_user = get_jwt_identity()
+    print('running authentication', current_user)
     
     if current_user:
         return jsonify(current_user)
