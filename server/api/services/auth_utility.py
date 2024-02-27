@@ -1,13 +1,13 @@
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
+
 
 import jwt
 import os
 from api.model import db, Users
 import bcrypt
 from time import time
+
 
 
 #LOGIN
@@ -27,6 +27,7 @@ def user_login(email, password):
         return jsonify(access_token=token), 200
     
     return jsonify({"message": "User not found: invalid Email or Password"}), 404
+
 
 
 # SIGNUP: New User creation
@@ -51,7 +52,7 @@ def register_user(user_name, email, password):
 
 
 
-# Generate reset token
+# PSW TOKEN: Generate reset token
 def generate_reset_token(user):
     print('Reset psw: reset token generation')
     expires=500
@@ -64,7 +65,7 @@ def generate_reset_token(user):
     return token
 
 
-# Check if reset toke is still valid and if match en existing user 
+# PSW TOKEN CHECK: Check if reset toke is still valid and if match en existing user 
 def verify_reset_token(token):
     if not token:
         return jsonify({"error": "Missing Token"}), 400
@@ -87,7 +88,7 @@ def verify_reset_token(token):
         return jsonify({"error": str(e)}), 500
 
 
-# Update psw in the user table record
+# UPDATE PSW: Update psw in the user table record
 def set_new_password(token):
     if not token:
         return jsonify({"error": "Missing Token"}), 400

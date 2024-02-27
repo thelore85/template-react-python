@@ -1,24 +1,14 @@
 # Flask import
 from flask import Blueprint, jsonify, request
-from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
-
-# Bcript import
-import bcrypt
-import jwt
-import os
 
 # File import
 from api.model import db, Users
 from api.services.email_utility import send_recovery_email
 from api.services.auth_utility import set_new_password, verify_reset_token, generate_reset_token, register_user, user_login
 
-
-############################
-# General setting
-###########################
 
 # blueprint setting
 api = Blueprint('api', __name__)
@@ -27,7 +17,6 @@ api = Blueprint('api', __name__)
 
 ##########################################################
 # End points
-##########################################################
 
 
 @api.route('/new-password', methods=['PUT'])
@@ -45,8 +34,8 @@ def verify_reset_token_endpoint():
 
 
 @api.route('/recovery-email', methods=['POST'])
-def email_endpoint():
-    email = request.json.get('email') 
+def send_token_reset_email():
+    email = request.json.get('email')
     user = Users.query.filter_by(email = email).first()
     if user:
         token = generate_reset_token(user)
@@ -100,7 +89,6 @@ def get_users():
     # Serializza la lista di utenti in un formato JSON e restituiscila
     users = [{"id": user.id, "user_name": user.user_name, "email": user.email} for user in users_array]
     return jsonify(users)
-
 
 
 
