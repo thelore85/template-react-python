@@ -13,7 +13,7 @@ import os
 # File import
 from api.model import db, Users
 from api.services.email_utility import send_recovery_email
-from api.services.auth_utility import set_new_password, verify_reset_token, generate_reset_token
+from api.services.auth_utility import set_new_password, verify_reset_token, generate_reset_token, register_user, user_login
 
 
 ############################
@@ -36,13 +36,14 @@ def new_password_setting():
     return set_new_password(token)
 
 
+
 @api.route('/verify-reset-token', methods=['POST'])
 def verify_reset_token_endpoint():
     token = request.json.get('token')
     return verify_reset_token(token)
 
 
-# Reset Psw: email recovery delivery
+
 @api.route('/recovery-email', methods=['POST'])
 def email_endpoint():
     email = request.json.get('email') 
@@ -56,67 +57,30 @@ def email_endpoint():
 
 
 
-# SIGNUP
 @api.route("/signup", methods=['POST'])
 def signup():
-
     user_name = request.json.get("userName", None) 
     email = request.json.get("email", None) 
     password = request.json.get("password", None)
-    password_bytes = password.encode('utf-8') if password is not None else None #conver string in byte string
-    hashed = bcrypt.hashpw(password_bytes, bcrypt.gensalt())
 
-
-    # Verify pro exists
-    existing_pro = Users.query.filter_by(email=email).first()
-    if existing_pro:
-        return jsonify({"message": "Not registered: user already exists"}), 401
-    
-    if email == '' or password ==  '' or user_name == '':
-        return jsonify({"message": "Not registered: Invalid Email or Password"}), 401
-    
-    if len(password) < 6:
-        return jsonify({"message": "Password must be at least 6 characters long"}), 401
-    
-
-    # Create record instance
-    new_pro = Users(user_name = user_name, email = email, password = hashed)
-
-    # Add instance to the table
-    db.session.add(new_pro)
-    db.session.commit()
-
-    return jsonify({"message": "User registered successfully"}), 200
+    success, message = register_user(user_name, email, password)
+    if success:
+        return jsonify({"message": message}), 200
+    else:
+        return jsonify({"message": message}), 401
 
 
 
-# LOGIN - authentication - token generation
 @api.route("/login", methods=['POST'])
 def login():
     email = request.json.get("email")
     password = request.json.get("password")
     password_bytes = password.encode('utf-8') if password is not None else None #conver string in byte string
 
-    # Check if pro exists
-    pro = Users.query.filter_by(email=email).first()
-
-    #check if psw match    
-    if pro and bcrypt.checkpw(password_bytes, pro.password):
-        # Define identity as a dictionary with keys and values
-        identity = {
-            "id": pro.id,
-            "user_name": pro.user_name,
-            "email": pro.email
-        }
-        # Generate access token using the dictionary as identity
-        token = create_access_token(identity=identity)
-        return jsonify(access_token=token), 200
-    
-    return jsonify({"message": "User not found: invalid Email or Password"}), 404
+    return user_login(email, password_bytes)
 
 
 
-# AUTHENTICATION - get user data
 @api.route("/authentication", methods=["GET"])
 @jwt_required()
 def pro_authentication():  
@@ -125,10 +89,9 @@ def pro_authentication():
     
     if current_user:
         return jsonify(current_user)
-    
 
 
-# GET USER LIST - get all users
+
 @api.route("/users", methods=["GET"])
 def get_users():
     # call db table /pro
