@@ -52,21 +52,37 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="needs-validation mb-3" noValidate="">
             <hr className="my-4" />
         
+            <div className="col-12 mb-3">
+              <label htmlFor="email" className="form-label">Email</label>
+              <input 
+                type="email" 
+                className="form-control" 
+                id="email" 
+                placeholder="you@example.com" 
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email" 
+              />
+            </div>
 
-              <div className="col-12 mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input type="email" className="form-control" id="email" placeholder="you@example.com" onChange={(e) => setEmail(e.target.value)}/>
+            <div className="col-12 mb-3">
+              <label htmlFor="password" className="form-label">Password</label>
+              <div className="input-group has-validation">
+                <input 
+                  type={ !showPassword ? "password" : "text"} 
+                  className="form-control" 
+                  id="password" 
+                  placeholder="*******" 
+                  required="" 
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                />
+                <span className="input-group-text" onClick={() => setShowPassword(!showPassword)}>
+                  { !showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+                </span>
               </div>
+            </div>
 
-              <div className="col-12 mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
-                <div className="input-group has-validation">
-                  <input type={ !showPassword ? "password" : "text"} className="form-control" id="password" placeholder="*******" required="" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                  <span className="input-group-text" onClick={() => setShowPassword(!showPassword)}>
-                    { !showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
-                  </span>
-                </div>
-              </div>
 
             <hr className="my-4" />
             <input type='submit' value="submit" className="w-100 btn btn-primary btn-lg mt-5" />

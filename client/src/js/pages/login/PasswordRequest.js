@@ -19,18 +19,30 @@ export default function PasswordRecovery() {
 
     const fetchRecoveryEmail = async (email) => {
 
-      console.log(email)
-      const url = process.env.BACK_URL + "/api/recovery-email";
-      const options = {
-        method:'POST',
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({email})
+      try{
+        console.log(email)
+        const url = process.env.BACK_URL + "/api/recovery-email";
+        const options = {
+          method:'POST',
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({email})
+        }
+    
+        const response = await fetch(url, options)
+    
+        if(response.ok){ 
+          setShowSuccess(true); 
+          const data = await response.json()
+          console.log(data.message, response.status)}
+        if(!response.ok){
+          setShowError(true)
+          const data = await response.json()
+          console.log(data.message, response.status)
+        }
+        
+      }catch(error){
+        console.log('error', error)
       }
-  
-      const response = await fetch(url, options)
-  
-      if(response.ok){ setShowSuccess(true)}
-      if(!response.ok){ setShowError(true)}
   
     }
     fetchRecoveryEmail(email)

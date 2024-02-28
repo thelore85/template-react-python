@@ -4,7 +4,7 @@ import { HashRouter as ReactRouter, Route, Routes } from "react-router-dom"; // 
 // Layout
 import DashboardLayout from "../layouts/DashboardLayout";
 import NavbarLayout from "../layouts/NavbarLayout";
-import SignupLayout from "../layouts/SignupLayout";
+import AuthLayout from "../layouts/AuthLayout";
 
 // Pages
 import Home from "../pages/home/Home";
@@ -34,17 +34,13 @@ const Router = () => {
               <Route path="*" element={<NavbarLayout><File404 /></NavbarLayout>} />
               
               {/* SIGNUP */}
-              <Route path="/login/" element={<SignupLayout><Login /></SignupLayout>} />
-              <Route path="/signup/" element={<SignupLayout><Signup /></SignupLayout>} />
-              <Route path="/password-request/" element={<SignupLayout><PasswordRequest /></SignupLayout>} />
-              <Route path="/password-setting/:token" element={<SignupLayout><PasswordSetting /></SignupLayout>} />
+              <Route path="/login/" element={<AuthLayout><Login /></AuthLayout>} />
+              <Route path="/signup/" element={<AuthLayout><Signup /></AuthLayout>} />
+              <Route path="/password-request/" element={<AuthLayout><PasswordRequest /></AuthLayout>} />
+              <Route path="/password-setting/:token" element={<AuthLayout><PasswordSetting /></AuthLayout>} />
 
-            
               {/* DASHBOARD */}
               <Route path="/dashboard/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
-
-              {/* BOOKING PAGE */}
-              <Route path="/booking/:pagename" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
 
             </Routes>
           </ScrollToTop>

@@ -62,26 +62,52 @@ export default function SignupPersonalData() {
           <form onSubmit={ handleSubmit } className="needs-validation mb-3" noValidate="">
             <hr className="my-4" />
           
-              <div className="col-12 mb-3">
-                <label htmlFor="username" className="form-label">Username</label>
-                <input type="text" className="form-control" id="username" placeholder="you@example.com" value={userName} onChange={(e) => setUserName(e.target.value)}/>
-              </div>
+            <div className="col-12 mb-3">
+              <label htmlFor="username" className="form-label">Username</label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="username" 
+                placeholder="you@example.com" 
+                value={userName} 
+                onChange={(e) => setUserName(e.target.value)}
+                autoComplete="username" // Gestisce l'autocompletamento per l'username
+              />
+            </div>
 
-              <div className="col-12 mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input type="email" className="form-control" id="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)}/>
-              </div>
+            <div className="col-12 mb-3">
+              <label htmlFor="email" className="form-label">Email</label>
+              <input 
+                type="email" 
+                className="form-control" 
+                id="email" 
+                placeholder="you@example.com" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email" // Gestisce l'autocompletamento per l'email
+              />
+            </div>
 
-              <div className="col-12 mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
-                <div className="input-group has-validation">
-                  <input type={ !showPassword ? "password" : "text"} className="form-control" id="password" placeholder="*******" required="" value={password} onChange={handlePassword}/>
-                  <span className="input-group-text" onClick={() => setShowPassword(!showPassword)}>
-                    { !showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
-                  </span>
-                </div>
-                {passwordError && <div className="text-danger mt-1">{passwordError}</div>}
+            <div className="col-12 mb-3">
+              <label htmlFor="password" className="form-label">Password</label>
+              <div className="input-group has-validation">
+                <input 
+                  type={ !showPassword ? "password" : "text"} 
+                  className="form-control" 
+                  id="password" 
+                  placeholder="*******" 
+                  required="" 
+                  value={password} 
+                  onChange={handlePassword}
+                  autoComplete="new-password" // Gestisce l'autocompletamento per la nuova password
+                />
+                <span className="input-group-text" onClick={() => setShowPassword(!showPassword)}>
+                  { !showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+                </span>
               </div>
+              {passwordError && <div className="text-danger mt-1">{passwordError}</div>}
+            </div>
+
 
             <hr className="my-4" />
             <input 

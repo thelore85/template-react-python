@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link, useParams} from 'react-router-dom'
+import { useNavigate, useParams} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash, faClose} from '@fortawesome/free-solid-svg-icons'
 
@@ -18,8 +18,7 @@ export default function PasswordSetting() {
 
   useEffect(()=>{
     const fetchData = async () => {
-      const userData = await verifyToken(token)
-      setUserEmail(userData.email)
+      await verifyToken(token)
     }
     fetchData()
   },[])
@@ -30,7 +29,6 @@ export default function PasswordSetting() {
     setShowError(false);
     setShowSuccess(false);
     changePassword(userEmail, newPassword)
-    console.log("user data", userEmail, newPassword)
   };
 
 
@@ -47,12 +45,13 @@ export default function PasswordSetting() {
     const response = await fetch(url, options);
     if (response.ok) {
       const data = await response.json();
-      console.log('Password reset data: ', data);
+      setUserEmail(data.email)
       return data
-    } else {
-      alert('token link invalid or expired')
-      navigate('/')
-      return ''
+    }
+    if (!response.ok){
+      console.log('token link invalid or expired')
+      // navigate('/')
+      return false
     }
   };
   
@@ -97,7 +96,7 @@ export default function PasswordSetting() {
             <div className="col-12 mb-3">
                 <label htmlFor="password" className="form-label">Password</label>
                 <div className="input-group has-validation">
-                  <input type={ !showPassword ? "password" : "text"} className="form-control" id="password" placeholder="*******" required="" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>
+                  <input type={ !showPassword ? "password" : "text"} className="form-control" id="password" placeholder="*******" autoComplete="new-password" required={true} value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>
                   <span className="input-group-text" onClick={() => setShowPassword(!showPassword)}>
                     { !showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
                   </span>
