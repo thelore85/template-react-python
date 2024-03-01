@@ -18,12 +18,13 @@ Whether you're starting a new project or exploring full-stack development, this 
 - **React**
 - **Webapck**
 - **Bootstrap**
+- **React-Router**
+- **Flux**
 
 **BACKEND**
 - **Python**
 - **Flask**
 - **SQLAlchemy**
-- **Flux - server**
 - **React Router**
 - **JWT - auth manager**
 - **SQLight DB**
@@ -63,7 +64,8 @@ git clone https://github.com/thelore/template-react-python.git
   ```
 
 3. **Start the server**:
-- Ensure you have Python 3.12 or above installed on your system (if not, refer to the installation guide).
+- Ensure you have Python 3.12 or above installed on your system (if not, [refer to this installation guide](https://kinsta.com/knowledgebase/install-python/)
+).
 - Navigate to the project's server folder:
   ```
   cd template-react-python/server
@@ -89,10 +91,18 @@ Enjoy exploring the app template!
 
 ## Folder Structure
 
-- `src/`: Contains your application's source code.
-  - `components/`: Place your React components here.
-  - `styles/`: Store your CSS or SCSS files here.
-- `public/`: Contains static assets like HTML files and images.
+- `client/`: frontend.
+  - `src/`
+    - `js/`
+      - `layout/`: managing all different layout (home, dashboard, singup....)
+      - `pages/`: pages archive
+      - `router/`: react-router setting 
+      - `store/`: flux configuration
+  
+- `server/`: backend
+  - `api/`: .py archive like routes, confic, admin, etc
+    - `services/`: backend logic
+  - `assets`: html email and other utilities
 
 ## Collaboration Instructions
 
@@ -144,9 +154,11 @@ Thank you for helping to improve the **template-react-python** project. We appre
 
 ## License
 
-This template project is licensed under the MIT License - see the `LICENSE.md` file for details.
+This template project is licensed under the MIT License - see the [LICENSE.md](https://github.com/thelore85/template-react-python/blob/main/LICENSE.md)
+ file for details.
 
 ---
 
-**Author**: Piqus
+**Author**: thelore85
+
 **Website**: [piqus.it](https://piqus.it)
