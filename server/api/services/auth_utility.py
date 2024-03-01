@@ -53,16 +53,20 @@ def register_user(user_name, email, password):
 
 
 # PSW TOKEN: Generate reset token
-def generate_reset_token(user):
-    print('Reset psw: reset token generation')
+def generate_reset_token(user_email):   
     expires=500
     secret_key = os.getenv('SECRET_KEY_FLASK')
     if secret_key is None:
         raise ValueError("SECRET_KEY_FLASK not set correctly")
+    
+    user = Users.query.filter_by(email = user_email).first()
+    if user is None:
+        return False, "No user with this email"
+    
+    if user:
+        token = jwt.encode({'email': user.email, 'reset_password': user.user_name, 'exp': time() + expires}, key=secret_key)
+        return token, "Token Generated"
 
-    # Generate temporary token for psw reset
-    token = jwt.encode({'email': user.email, 'reset_password': user.user_name, 'exp': time() + expires}, key=secret_key)
-    return token
 
 
 # PSW TOKEN CHECK: Check if reset toke is still valid and if match en existing user 
@@ -86,6 +90,7 @@ def verify_reset_token(token):
         return jsonify({"error": "Token invalid"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 # UPDATE PSW: Update psw in the user table record

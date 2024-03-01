@@ -21,12 +21,12 @@ api = Blueprint('api', __name__)
 
 @api.route('/new-password', methods=['PUT'])
 def new_password_setting():
-    token = request.headers.get('Authorization') # Ottenere il token dall'header Authorization
+    token = request.headers.get('Authorization')
     return set_new_password(token)
 
 
 
-@api.route('/verify-reset-token', methods=['POST'])
+@api.route('/verify-reset-token', methods=['POST']) # Used in the 'password setting page': if not valid, no acces to the page
 def verify_reset_token_endpoint():
     token = request.json.get('token')
     return verify_reset_token(token)
@@ -36,13 +36,14 @@ def verify_reset_token_endpoint():
 @api.route('/recovery-email', methods=['POST'])
 def send_token_reset_email():
     email = request.json.get('email')
-    user = Users.query.filter_by(email = email).first()
-    if user:
-        token = generate_reset_token(user)
-        send_recovery_email(user, token)
-        return 'Email sent successfully', 200
+    token, message = generate_reset_token(email)
+
+    if token:
+        send_recovery_email(email, token)
+        return jsonify({'message': message}), 200
+    
     else:
-        return 'Invalid email provided', 400
+        return jsonify({'message': message}),400
 
 
 

@@ -3,8 +3,11 @@ import smtplib
 from api.model import Users 
 
 
-def send_recovery_email(user, token):
+def send_recovery_email(user_email, token):
     
+    user = Users.query.filter_by(email=user_email).first()
+    if not user:
+        return False, "User email invalid"
 
     # SMTP configuration
     smtp_server = os.getenv("EMAIL_SERVER")
