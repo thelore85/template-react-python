@@ -8,11 +8,30 @@ This React template project is designed to streamline the development process fo
 
 ## Features
 
-- **React**: A powerful JavaScript library for building user interfaces.
-- **Webpack**: Bundles and optimizes your code for production.
-- **Babel**: Transpiles modern JavaScript so you can use the latest features.
-- **ESLint**: Enforces code quality and style guidelines.
-- **CSS Modules**: Allows you to write scoped CSS for your components.
+**FRONTEND**
+- **Node**
+- **React**
+- **Webapck**
+- **Bootstrap**
+
+**BACKEND**
+- **Python**
+- **Flask**
+- **SQLAlchemy**
+- **Flux - server**
+- **React Router**
+- **JWT - auth manager**
+- **SQLight DB**
+- **Bcrypt - psw hashing**
+- **Smtplib - email sender**
+
+**FUNCTIONALITY**
+- **Signup**
+- **Login/Logout**
+- **Dashboard**
+- **PSW encryption**
+- **Password recovery**
+
 
 ## Getting Started
 
@@ -31,15 +50,51 @@ Follow these steps to set up and start working with the template:
   - `styles/`: Store your CSS or SCSS files here.
 - `public/`: Contains static assets like HTML files and images.
 
-## Contributing
+## Collaboration Instructions
 
-We welcome contributions from the community. If you'd like to contribute to this template project, please follow these steps:
+Thank you for your interest in contributing to the **template-react-python** repository! We welcome contributions from the community to help improve and evolve this project. To collaborate effectively, please follow these guidelines:
 
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix: `git checkout -b feature-name`
-3. Make your changes and commit them: `git commit -m 'Add new feature'`
-4. Push your branch to your fork: `git push origin feature-name`
-5. Open a Pull Request on GitHub, and describe your changes in detail.
+1. **Fork the Repository**: 
+
+Start by forking this repository to your GitHub account. This will create a copy of the project that you can freely experiment with.
+
+2. **Clone the Repository**: 
+
+After forking, clone the repository to your local machine using Git. You can do this by running the following command in your terminal:
+
+```sh
+git clone https://github.com/your-username/template-react-python.git
+```
+
+3. **Create a New Branch**:
+
+Before making any changes, create a new branch from 'develop' for your contributions.
+- Move in the develop branch: `git checkout develop` 
+- Create a new Branch: `git checkout -b feature-name` use a descriptive branch name that reflects the purpose of your changes.
+
+**NOTE: do not branch from `main`, any pull request directed to main will be ignored**
+
+4. **Make Your Changes**: 
+
+Implement your desired changes or add new features to the project within your branch. Ensure that your changes align with the project's guidelines and coding standards.
+
+5. **Submit a Pull Request**: 
+
+Once you've made your changes, push your branch to your forked repository on GitHub. Then, open a pull request (PR) from your branch to the main repository. Provide a clear title and description for your PR, outlining the purpose and scope of your changes.
+
+6. **Collaborate and Iterate**: 
+
+Engage in discussions with project maintainers and contributors through the PR comments. Be responsive to feedback and make necessary adjustments to your changes if required.
+
+7. **Merge and Celebrate**: 
+
+Once your PR has been reviewed and approved, a project maintainer will merge your changes into the main branch. Congratulations on your contribution!
+
+**NOTE: do not branch from main, any pull request directed to main will be ignored**
+
+
+Thank you for helping to improve the **template-react-python** project. We appreciate your efforts and look forward to your contributions!
+
 
 ## License
 
