@@ -1,0 +1,34 @@
+{
+  "parser": "@babel/eslint-parser",
+  "plugins": [
+    "react"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true // Aggiungi Node.js come ambiente
+  },
+  "globals": {
+    "process": true // Definisci process come variabile globale
+  },
+  "rules": {
+    "strict": 0,
+    "no-unused-vars": 0,
+    "no-mixed-spaces-and-tabs": 0,
+    "no-debugger": 0,
+    "no-console": 0,
+    "semi": 0,
+    "comma-dangle": 0,
+    "allowImportExportEverywhere": 0,
+    "react/prop-types": 0
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"]
+}
+
+
+

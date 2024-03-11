@@ -11,5 +11,5 @@ export default function AuthLayout({children}) {
       <Footer />
     </div>
   );
-};
+}
 
