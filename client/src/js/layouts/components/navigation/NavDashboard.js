@@ -32,4 +32,4 @@ export default function NavDashboard() {
       </div>
     </nav>
   );
-};
+}
