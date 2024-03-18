@@ -106,7 +106,7 @@ Enjoy exploring the app template!
 
 ## Collaboration Instructions
 
-Thank you for your interest in contributing to the **template-react-python** repository! We welcome contributions from the community to help improve and evolve this project. To collaborate effectively, please follow these guidelines:
+Thank you for your interest in contributing to the **template-react-python** repository! To collaborate effectively, please follow these guidelines:
 
 1. **Fork the Repository**: 
 
