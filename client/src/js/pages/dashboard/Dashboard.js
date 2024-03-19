@@ -9,24 +9,28 @@ export default function Dashboard() {
   const navigate = useNavigate()
 
   const [usersList, setUsersList] = useState([])
+  const [usersName, setUsersName] = useState([])
+  const [email, setEmail] = useState([])
 
-    useEffect(() => {
-      // Authenticate user
-      const fetchAuthentication = async () => {
-        const auth = await actions.authentication()
-        if(!auth){ navigate("/") }
-      }
-      fetchAuthentication()
+  useEffect(()=>{
+    if(!store.login){navigate("/")}
+  },[store.pro])
 
-      const fetchData = async () => {
-        const users = await actions.getUsers()
-        setUsersList(users)
+  useEffect(() => {
+    const fetchData = async () => {
+      const users = await actions.getUsers()
+
+      if(users.message){
+        setUsersList(users.data)
+      }else{
+        setUsersList(users.data)
       }
-      fetchData()
-    }, []);
+    }
+    fetchData()
+  }, [store.login]);
 
     const handleChangePassword = () => {
-      
+      alert("to change your password go to http://localhost:1954/#/password-request")
     }
 
   return (

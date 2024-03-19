@@ -71,14 +71,18 @@ def login():
 
 
 
+
 @api.route("/authentication", methods=["GET"])
 @jwt_required()
 def pro_authentication():  
-    current_user = get_jwt_identity()
-    print('running authentication', current_user)
+    identity = get_jwt_identity()
+    email = identity.get('email')
+    if email:
+        pro = Users.query.filter_by(email=email).first()
+        if pro:
+            return jsonify(pro.serialized())
     
-    if current_user:
-        return jsonify(current_user)
+    return jsonify({"message": "Pro not found"}), 404
 
 
 
@@ -87,9 +91,12 @@ def get_users():
     # call db table /pro
     users_array = Users.query.all()
 
-    # Serializza la lista di utenti in un formato JSON e restituiscila
-    users = [{"id": user.id, "user_name": user.user_name, "email": user.email} for user in users_array]
-    return jsonify(users)
+    if users_array:
+        # Serializza la lista di utenti in un formato JSON e restituiscila
+        users = [{"id": user.id, "user_name": user.user_name, "email": user.email} for user in users_array]
+        return jsonify(users)
+
+    return jsonify({"message": "no users", "data":[]}), 404
 
 
 

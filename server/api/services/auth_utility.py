@@ -14,19 +14,16 @@ from time import time
 def user_login(email, password):
     pro = Users.query.filter_by(email=email).first()
 
-    #check if psw match    
     if pro and bcrypt.checkpw(password, pro.password):
-        # Define identity as a dictionary with keys and values
         identity = {
             "id": pro.id,
-            "user_name": pro.user_name,
-            "email": pro.email
+            "username": pro.user_name,
+            "email": pro.email,
         }
-        # Generate access token using the dictionary as identity
         token = create_access_token(identity=identity)
-        return jsonify(access_token=token), 200
+        return jsonify(access_token=token, message="user logged in successfully"), 200
     
-    return jsonify({"message": "User not found: invalid Email or Password"}), 404
+    return jsonify(message="User not found: invalid Email or Password"), 404
 
 
 

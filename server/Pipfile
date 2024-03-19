@@ -22,7 +22,7 @@ python_version = "3.12"
 
 [scripts]
 init = "flask db init"
-start="flask run -p 2001 --debug -h 0.0.0.0"
+start="flask run -p 4001 --debug -h 0.0.0.0"
 migrate = "flask db migrate"
 upgrade = "flask db upgrade"
 deploy = "echo 'Please follow this 3 steps to deploy: https://start.4geeksacademy.com/deploy/render' "
