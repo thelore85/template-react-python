@@ -22,12 +22,10 @@ const getState = ({getStore, getActions, setStore}) => {
 
         if(response.ok){
           const data = await response.json()
-          return data
-        }
-
-        if(!response.ok){
-          console.log(response.status, response.statusText)
-          return []
+          return {message:"user list downloaded", data};
+        }else{
+          const errorData = await response.json()
+          return {error: errorData.message, data: errorData.data};
         }
       },
 
@@ -47,7 +45,6 @@ const getState = ({getStore, getActions, setStore}) => {
       
         if (response.ok) {
           const data = await response.json();
-          console.log(data.access_token)
           setToken(data.access_token);
           return { message: data.message };
         }else{

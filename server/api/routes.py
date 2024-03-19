@@ -91,9 +91,12 @@ def get_users():
     # call db table /pro
     users_array = Users.query.all()
 
-    # Serializza la lista di utenti in un formato JSON e restituiscila
-    users = [{"id": user.id, "user_name": user.user_name, "email": user.email} for user in users_array]
-    return jsonify(users)
+    if users_array:
+        # Serializza la lista di utenti in un formato JSON e restituiscila
+        users = [{"id": user.id, "user_name": user.user_name, "email": user.email} for user in users_array]
+        return jsonify(users)
+
+    return jsonify({"message": "no users", "data":[]}), 404
 
 
 

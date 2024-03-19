@@ -19,13 +19,18 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       const users = await actions.getUsers()
-      setUsersList(users)
+
+      if(users.message){
+        setUsersList(users.data)
+      }else{
+        setUsersList(users.data)
+      }
     }
     fetchData()
   }, [store.login]);
 
     const handleChangePassword = () => {
-      
+      alert("to change your password go to http://localhost:1954/#/password-request")
     }
 
   return (
