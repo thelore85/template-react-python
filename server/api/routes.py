@@ -71,14 +71,18 @@ def login():
 
 
 
+
 @api.route("/authentication", methods=["GET"])
 @jwt_required()
 def pro_authentication():  
-    current_user = get_jwt_identity()
-    print('running authentication', current_user)
+    identity = get_jwt_identity()
+    email = identity.get('email')
+    if email:
+        pro = Users.query.filter_by(email=email).first()
+        if pro:
+            return jsonify(pro.serialized())
     
-    if current_user:
-        return jsonify(current_user)
+    return jsonify({"message": "Pro not found"}), 404
 
 
 

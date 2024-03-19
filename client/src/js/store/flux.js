@@ -46,19 +46,19 @@ const getState = ({getStore, getActions, setStore}) => {
         const response = await fetch(url, options);
       
         if (response.ok) {
-          const token = await response.json();
-          setToken(token); 
-          return token
-        }
-        
-        if(!response.ok){
-          return null
+          const data = await response.json();
+          console.log(data.access_token)
+          setToken(data.access_token);
+          return { message: data.message };
+        }else{
+          const dataError = await response.json();
+          return { error: dataError.message}
         }
       },
       
       setToken: (token) => {
         setStore({ login: true })
-        localStorage.setItem("token", token.access_token)
+        localStorage.setItem("token", token)
       },
       
 			logout: () => {
@@ -88,23 +88,24 @@ const getState = ({getStore, getActions, setStore}) => {
             Authorization: `Bearer ${token}`,
           },
         };
-
         if (!token) {
-          setStore({ login: false });
-          return null;
+          setStore({ login: false, user: {} });
+          return {error: 'Pro no authenticated'};
         }
-    
+        
         const response = await fetch(url, options);
-    
+
         if (response.ok) {
           const data = await response.json();
           setStore({ login: true, user: data });
-          return data;
+          return {message:"pro authenticated", data};
         } else {
+          const data = await response.json();
           setStore({ login: false, user: {} });
-          return null;
+          return { error:data }
         }
       },
+
       
 
       signup: async (userName, email, password) => {

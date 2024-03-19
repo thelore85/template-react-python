@@ -19,24 +19,26 @@ export default function Login() {
     // Authenticate user
     const fetchAuthentication = async () => {
       const auth = await actions.authentication()
-      if(auth){ navigate("/dashboard") }
+      if(auth.data){ navigate("/dashboard") }
     }
     fetchAuthentication()
   }, [store.login]);
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-    const validUser = await actions.login(email, password);
-    if (validUser) {
-      navigate("/dashboard");
-    } else {
-      alert('Impossible to login: try another email or password');
-    }      
+    userLogin(email, password)
   };
-  
 
+
+  const userLogin = async (email, password) => {
+    const data = await actions.login(email, password);
+    if (data.message) {
+      console.log(data.message)
+    }else{
+      console.log(data.error);
+    }
+  }
 
   
   return (
