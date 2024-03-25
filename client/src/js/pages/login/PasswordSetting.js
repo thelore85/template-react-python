@@ -7,7 +7,10 @@ import { faEye, faEyeSlash, faClose} from '@fortawesome/free-solid-svg-icons'
 export default function PasswordSetting() {
 
   const navigate = useNavigate()
-  const { token } = useParams();
+  const { param } = useParams();
+
+  const token = encodeURIComponent(param);
+
 
   const [newPassword, setNewPassword] = useState('')
   const [showSuccess, setShowSuccess] = useState(false)

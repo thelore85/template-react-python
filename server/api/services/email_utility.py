@@ -15,11 +15,14 @@ def send_recovery_email(user_email, token):
     smtp_username = os.getenv("EMAIL_ACCOUNT")
     smtp_password = os.getenv("EMAIL_PSW")
 
+    # Global variables
+    front_url = os.getenv("FRONT_URL")
+
     # email details
     from_email = 'noreply@piqus.it'
     to_email = user.email
     subject = 'Password Recovery'
-    body = f'http://localhost:1954/#/password-setting/{token}'
+    body = f'{front_url}/password-setting/{token}'
 
     # message
     message = f'Subject: {subject}\n\n{body}'
