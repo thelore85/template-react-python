@@ -22,7 +22,7 @@ def send_recovery_email(user_email, token):
     from_email = 'noreply@piqus.it'
     to_email = user.email
     subject = 'Password Recovery'
-    body = f'{front_url}/password-setting/{token}'
+    body = f'{front_url}/password-setting?token={token}'
 
     # message
     message = f'Subject: {subject}\n\n{body}'

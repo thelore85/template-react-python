@@ -40,7 +40,11 @@ const Router = () => {
               <Route path="/login/" element={<LogoLayout><Login /></LogoLayout>} />
               <Route path="/signup/" element={<LogoLayout><Signup /></LogoLayout>} />
               <Route path="/password-request/" element={<LogoLayout><PasswordRequest /></LogoLayout>} />
-              <Route path="/password-setting/:token" element={<LogoLayout><PasswordSetting /></LogoLayout>} />
+              <Route path="/password-setting" element={<LogoLayout><PasswordSetting /></LogoLayout>} />
+              {/* <Route path="/password-setting/*" element={<LogoLayout><PasswordSetting /></LogoLayout>} /> */}
+
+
+          
 
               {/* DASHBOARD */}
               <Route path="/dashboard/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
