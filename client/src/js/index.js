@@ -1,17 +1,16 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client'
+//import react into the bundle
+import React from 'react'
+import {createRoot} from 'react-dom/client'
 
-// css
-import "../global.css"
+//include your index.scss file into the bundle
+import "./global.css";
 
-// Components
-import Router from './router/Router.js'
+//import your own components
+import Layout from './router/router.js'
 
+//
+const root = createRoot(document.querySelector("#app"))
 
-const root = createRoot(document.getElementById('root'));
+//render your react application
+root.render(<Layout/>)
 
-root.render(
-    <React.StrictMode>
-        <Router />
-    </React.StrictMode>
-);

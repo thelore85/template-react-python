@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams} from 'react-router-dom'
+import { useLocation, useNavigate} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash, faClose} from '@fortawesome/free-solid-svg-icons'
 
@@ -7,7 +7,10 @@ import { faEye, faEyeSlash, faClose} from '@fortawesome/free-solid-svg-icons'
 export default function PasswordSetting() {
 
   const navigate = useNavigate()
-  const { token } = useParams();
+
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('token');
 
   const [newPassword, setNewPassword] = useState('')
   const [showSuccess, setShowSuccess] = useState(false)
@@ -18,6 +21,7 @@ export default function PasswordSetting() {
 
   useEffect(()=>{
     const fetchData = async () => {
+      console.log(token)
       await verifyToken(token)
     }
     fetchData()
@@ -46,6 +50,7 @@ export default function PasswordSetting() {
     if (response.ok) {
       const data = await response.json();
       setUserEmail(data.email)
+      console.log(data)
       return data
     }
     if (!response.ok){

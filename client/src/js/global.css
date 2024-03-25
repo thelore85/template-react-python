@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700');
+
+
+/* ////////////////////////
+COLOR SISTEM 
+////////////////////////*/
+
+:root {
+  --primary: #e68b45;
+  --primary-subtle: #ffe0c8;
+  --primary-hover: #e96500;
+  --on-primary: rgb(250, 250, 250);
+  
+  --secondary: #989898;
+  /* --secondary-subtle: #e4e4e4; */
+  --secondary-subtle:linear-gradient(60deg, #ffffff 0%, #cdcdcd 100%);
+  --secondary-hoover: #c6c6c6;
+  --on-secondary: rgb(28, 28, 28);
+
+  --back:rgb(255, 255, 255);
+  --on-back: rgb(35, 35, 35);
+
+  --background-gradient-a:linear-gradient(30deg, #2f97ff 0%, #21d1db 100%);
+  --background-gradient-b:linear-gradient(30deg, rgba(203,0,139,1) 0%, rgb(255, 0, 115) 100%);
+  
+  --box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.192);
+  
+}
+
+[data-theme="dark"] {
+  --primary: #d100d5;
+  --on-primary: rgb(250, 250, 250);
+
+  --secondary: #eb9500;
+  --on-secondary: rgb(250, 250, 250);
+
+  --hover: rgb(250, 250, 250);
+  --on-hover: rgb(167, 0, 213);
+  
+  --back:rgb(0, 0, 0);
+  --on-back: rgb(255, 255, 255);
+  
+  --background-gradient-a:linear-gradient(30deg, #080043 0%, #300033 100%);
+  --background-gradient-b:linear-gradient(30deg, rgba(203,0,139,1) 0%, rgb(255, 0, 115) 100%);
+  
+  --box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.192);
+  
+}
+
+
+/* ////////////////////////
+GENERAL SETTING 
+////////////////////////*/
+
+* {  box-sizing: border-box;}
+
+html{  scroll-behavior: smooth;}
+
+body{
+	font-family: 'Poppins', sans-serif;
+	font-size: 15px;
+	font-weight: 200;
+  background-color:var(--background);
+  color: var(--on-background);
+}
+
+h1,h2,h3,h4,h5 {
+  font-family: 'Baloo 2', sans-serif;
+  color: var(--on-background);
+  font-weight: 700;
+}
+
+a{
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover{
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+p{
+  margin-bottom: 0;
+}
+
+
+
+/* /////////////////////////// */
+/* BOOTSTRAP FINE TUNING */
+/* /////////////////////////// */
+
+.btn{
+  text-transform: capitalize;
+  border:none;
+}
+
+.btn-primary{
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+.btn-primary:disabled{
+  background-color: var(--primary-subtle);
+  color: var(--on-primary);
+}
+
+.btn-secondary{
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+}
+
+
+.btn-primary:hover{
+  background-color: var(--primary-hover);
+  color: var(--on-primary);
+}
+
+.btn-secondary:hover{
+  background-color: var(--hover);
+  color: var(--on-hover);
+}
+
+.text-primary{
+  color: var(--primary) !important
+}
+
+.border-primary{
+  border: solid var(--primary) 2px !important
+}
+
+.bg-primary{
+  background: var(--primary) !important
+}
+.bg-primary-subtle{
+  background: var(--primary-subtle) !important
+}
+
+.bg-secondary{
+  background: var(--secondary) !important
+}
+.bg-secondary-subtle{
+  background: var(--secondary-subtle) !important
+}
+
+.text-gray{
+  color: rgb(97, 97, 97)
+}
+
+.w-33{
+  width:33%;
+}
+
+.rounded-3{
+  border-radius: 30px !important
+}
+
+.rounded-2{
+  border-radius: 15px !important
+}
+
