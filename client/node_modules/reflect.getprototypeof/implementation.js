@@ -1,8 +1,8 @@
 'use strict';
 
 var GetIntrinsic = require('get-intrinsic');
-var IsCallable = require('es-abstract/2023/IsCallable');
-var Type = require('es-abstract/2023/Type');
+var IsCallable = require('es-abstract/2024/IsCallable');
+var Type = require('es-abstract/2024/Type');
 var whichBuiltinType = require('which-builtin-type');
 var $TypeError = require('es-errors/type');
 

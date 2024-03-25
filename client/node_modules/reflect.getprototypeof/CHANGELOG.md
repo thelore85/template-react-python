@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.6](https://github.com/es-shims/Reflect.getPrototypeOf/compare/v1.0.5...v1.0.6) - 2024-03-16
+
+### Commits
+
+- [meta] remove useless ESM [`cc16ab1`](https://github.com/es-shims/Reflect.getPrototypeOf/commit/cc16ab1f3b050c9465b41fbbf79e284e8e9084ff)
+- [Deps] update `call-bind`, `es-abstract`, `es-errors`, `get-intrinsic` [`ece7445`](https://github.com/es-shims/Reflect.getPrototypeOf/commit/ece7445f03d148c67f5fc91ea455a05731b54cea)
+- [Dev Deps] update `tape` [`a894b62`](https://github.com/es-shims/Reflect.getPrototypeOf/commit/a894b624c16247cbb76a00e76a39e3d44ac5bccf)
+
 ## [v1.0.5](https://github.com/es-shims/Reflect.getPrototypeOf/compare/v1.0.4...v1.0.5) - 2024-02-04
 
 ### Commits

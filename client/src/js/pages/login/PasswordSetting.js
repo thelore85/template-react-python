@@ -18,7 +18,8 @@ export default function PasswordSetting() {
 
   useEffect(()=>{
     const fetchData = async () => {
-      await verifyToken(token)
+      console.log(token)
+      // await verifyToken(token)
     }
     fetchData()
   },[])

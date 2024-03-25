@@ -1,52 +1,55 @@
 import React from "react";
-import { HashRouter as ReactRouter, Route, Routes } from "react-router-dom"; // in prod import BrowserRouter instead of HashRouter
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+// funcitonal components
+import ScrollToTop from "./scrollToTop";
+import injectContext from "../store/appContext";
 
 // Layout
-import DashboardLayout from "../layouts/DashboardLayout";
+import LogoLayout from "../layouts/LogoLayout";
+import DashboardLayout from "../layouts/DashLayout";
 import NavbarLayout from "../layouts/NavbarLayout";
-import AuthLayout from "../layouts/AuthLayout";
 
 // Pages
-import Home from "../pages/home/Home";
 import Login from "../pages/login/login.js";
+import Home from "../pages/home/home";
 import Signup from "../pages/login/Signup";
 import PasswordRequest from "../pages/login/PasswordRequest.js";
 import PasswordSetting from "../pages/login/PasswordSetting.js";
 import Dashboard from "../pages/dashboard/Dashboard.js";
 import File404 from "../pages/404/File404";
 
-// Components
-import ScrollToTop from "./ScrollToTop";
-import injectContext from "../store/appContext.js"
 
 const Router = () => {
-  const basename = process.env.BASENAME || "/";
 
-  return (
+	//the basename is used when your project is published in a subdirectory and not in the root of the domain
+	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
+	const basename = process.env.BASENAME || "";
 
-        <ReactRouter basename={basename}>
+	return (
+		<div>
+			<BrowserRouter basename={basename}>
+				<ScrollToTop>
+					<Routes>
 
-          <ScrollToTop>
-            <Routes>
-
-              {/* FRONTPAGE */}
+            {/* FRONTPAGE */}
               <Route index element={<NavbarLayout><Home /></NavbarLayout>} />
               <Route path="*" element={<NavbarLayout><File404 /></NavbarLayout>} />
               
               {/* SIGNUP */}
-              <Route path="/login/" element={<AuthLayout><Login /></AuthLayout>} />
-              <Route path="/signup/" element={<AuthLayout><Signup /></AuthLayout>} />
-              <Route path="/password-request/" element={<AuthLayout><PasswordRequest /></AuthLayout>} />
-              <Route path="/password-setting/:token" element={<AuthLayout><PasswordSetting /></AuthLayout>} />
+              <Route path="/login/" element={<LogoLayout><Login /></LogoLayout>} />
+              <Route path="/signup/" element={<LogoLayout><Signup /></LogoLayout>} />
+              <Route path="/password-request/" element={<LogoLayout><PasswordRequest /></LogoLayout>} />
+              <Route path="/password-setting/:token" element={<LogoLayout><PasswordSetting /></LogoLayout>} />
 
               {/* DASHBOARD */}
               <Route path="/dashboard/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
-
-            </Routes>
-          </ScrollToTop>
-
-        </ReactRouter>
-  );
-}
+						
+					</Routes>
+				</ScrollToTop>
+			</BrowserRouter>
+		</div>
+	);
+};
 
 export default injectContext(Router);

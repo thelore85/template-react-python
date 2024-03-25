@@ -1,110 +1,85 @@
 {
-
-  "name": "react-template",
-
-  "version": "1.0.1",
-
-  "description": "",
-
-  "main": "index.js",
-
-  "scripts": {
-
-    "start": "webpack-dev-server --mode development --open --hot",
-
-    "build": "webpack --mode production"
-
-  },
-
-  "author": "piqus.it",
-
-  "license": "ISC",
-
-  "dependencies": {
-
-    "bootstrap": "^5.3.2",
-
-    "react": "^18.2.0",
-
-    "react-bootstrap": "^2.9.2",
-
-    "react-dom": "^18.2.0",
-
-    "react-router": "^6.0.2",
-
-    "react-router-dom": "^6.4.3"
-
-  },
-
-  "devDependencies": {
-
-    "@babel/core": "^7.22.6",
-
-    "@babel/eslint-parser": "^7.23.10",
-
-    "@babel/preset-env": "^7.22.6",
-
-    "@babel/preset-react": "^7.22.5",
-
+	"name": "bigweb - full stack template",
+	"engines": {
+		"node": "18.x"
+	},
+	"version": "1.1.0",
+	"description": "React - Python full stack template for web application",
+	"main": "index.js",
+	"scripts": {
+		"start": "webpack-dev-server --config webpack.dev.js --host 0.0.0.0 --port 3000",
+		"build": "webpack --config webpack.prod.js",
+		"deploy": "node deploy-to-github.js"
+	},
+	"author": {
+		"name": "Lorezo Garofalo",
+		"url": "https://bigweb.club"
+	},
+	"license": "ISC",
+	"devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
-
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
-
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
-
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
-
     "@fortawesome/react-fontawesome": "^0.2.0",
 
-    "babel-loader": "^8.0.6",
+		"@babel/cli": "^7.16.0",
+		"@babel/core": "^7.16.0",
+		"@babel/plugin-proposal-class-properties": "^7.16.0",
+		"@babel/plugin-transform-runtime": "^7.16.4",
+		"@babel/preset-env": "^7.16.4",
+		"@babel/preset-react": "^7.16.0",
+		"@babel/runtime": "^7.16.3",
+		"babel-eslint": "^10.1.0",
+		"babel-loader": "^8.2.3",
+		"babel-plugin-transform-class-properties": "^6.24.1",
 
-    "css-loader": "^6.8.1",
+		"bc-console": "0.0.2",
+		"css-loader": "^6.5.1",
+		"dotenv-webpack": "^7.0.3",
+		"envfile": "^6.17.0",
+		"error-overlay-webpack-plugin": "^1.0.0",
 
-    "dotenv-webpack": "^8.0.1",
+		"eslint": "^8.4.0",
+		"eslint-plugin-react": "^7.27.1",
+		"eslint-webpack-plugin": "^3.1.1",
+		
+    "file-loader": "^6.2.0",
+		"gh-pages": "^3.2.3",
+		"html-loader": "^3.0.1",
+		"html-webpack-plugin": "^5.5.0",
+		"parse-github-url": "^1.0.2",
+		"prettier": "^2.5.1",
+		"remote-origin-url": "^2.0.0",
+		"style-loader": "^3.3.1",
 
-    "eslint": "^8.57.0",
-
-    "eslint-formatter-friendly": "^7.0.0",
-
-    "eslint-plugin-react": "^7.34.0",
-
-    "eslint-webpack-plugin": "4.0.1",
-
-    "html-webpack-plugin": "^5.5.3",
-
-    "prettier": "^3.2.5",
-
-    "sass": "^1.63.6",
-
-    "sass-loader": "^13.3.2",
-
-    "style-loader": "^3.3.3",
-
-    "svg-url-loader": "^8.0.0",
-
-    "webpack": "^5.90.3",
-
-    "webpack-cli": "^5.1.4",
-
-    "webpack-dev-server": "^5.0.2"
-
-  },
-
-  "now": {
-
-    "builds": [
-
-      {
-
-        "src": "webpack.config.js",
-
-        "use": "@now/static-build"
-
-      }
-
-    ]
-
-  }
-
+		"webpack": "^5.65.0",
+		"webpack-cli": "^4.9.1",
+		"webpack-dev-server": "^4.6.0",
+		"webpack-merge": "^5.8.0"
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env",
+			"@babel/preset-react"
+		],
+		"plugins": [
+			"@babel/plugin-proposal-class-properties",
+			[
+				"@babel/plugin-transform-runtime",
+				{
+					"regenerator": true
+				}
+			]
+		]
+	},
+	"dependencies": {
+		"prop-types": "^15.7.2",
+		"query-string": "^7.0.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-polyfills": "0.0.1",
+		"react-router": "^6.0.2",
+		"react-router-dom": "^6.4.3"
+	}
 }
-
