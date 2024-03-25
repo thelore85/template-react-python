@@ -3,32 +3,29 @@
   "plugins": [
     "react"
   ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
   "env": {
     "browser": true,
-    "es6": true,
-    "node": true // Aggiungi Node.js come ambiente
+    "es6": true
   },
-  "globals": {
-    "process": true // Definisci process come variabile globale
-  },
+  "extends": [ "plugin:react/recommended"],
   "rules": {
-    "strict": 0,
+    "strict":0,
     "no-unused-vars": 0,
+    "no-console": 1,
     "no-mixed-spaces-and-tabs": 0,
-    "no-debugger": 0,
-    "no-console": 0,
-    "semi": 0,
-    "comma-dangle": 0,
-    "allowImportExportEverywhere": 0,
-    "react/prop-types": 0
-  },
-  "extends": ["eslint:recommended", "plugin:react/recommended"]
+    "no-debugger": 0, 
+    "semi": ["error", "always"],
+    "allowImportExportEverywhere": false,
+    "indent": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "comma-dangle": [1, { //when to use the last comma
+        "arrays": "never",
+        "objects": "never",
+        "imports": "never",
+        "exports": "never",
+        "functions": "ignore",
+    }],
+    "react/prop-types": [2]
+  }
 }
-
-
-
