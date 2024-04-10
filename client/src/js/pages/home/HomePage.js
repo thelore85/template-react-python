@@ -1,10 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
+import { Helmet } from 'react-helmet';
 
-
-export default function Home() {
+export default function HomePage() {
 
   return (
-    <> 
+    <>
+    <Helmet>
+
+        <title>BIGWEB.club - Full Stack web template</title>
+        <meta name="title" content="Fulll Web App template for your React app | BIGWEB.club"/>
+        <meta name="description" content="Start developing your Web App in seconds! All basic functionality already in place to focus only on your app dev. Have Fun!"/>
+        <meta name="keywords" content="Web development, Web Marketing, Web Design, full stack, react, python" />
+      
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.bigweb.club" />
+        <meta property="og:title" content="Fulll Web App template for your React app |HOME PAGE" />
+        <meta property="og:description" content="Start developing your Web App in seconds! All basic functionality already in place to focus only on your app dev. Have Fun!" />
+        <meta property="og:image" content="ogimage.jpg" />
+
+  </Helmet>
     <main className="d-flex align-items-center bg-dark" style={{ minHeight: '80vh'}}>
       <div className="container py-5">
       
@@ -14,7 +28,7 @@ export default function Home() {
         
         <section className="row text-white py-3 px-2 mb-4 border-bottom">
         
-          <div className="col-sm-4">
+          <div className="col-sm-3">
             <h4 className=" fw-normal text-primary">Frontend</h4>
             <ul>
               <li>Node</li>
@@ -22,10 +36,11 @@ export default function Home() {
               <li>Bootstraps</li>
               <li>Font Awesome</li>
               <li>Webpack</li>
+              <li>Eslint</li>
             </ul>
           </div>
 
-          <div className="col-sm-4">
+          <div className="col-sm-3">
             <h4 className=" fw-normal text-primary">Backend</h4>
             <ul>
               <li>Python</li>
@@ -40,7 +55,7 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="col-sm-4">
+          <div className="col-sm-3">
             <h4 className=" fw-normal text-primary">Functionality</h4>
             <ul>
               <li>Signup</li>
@@ -48,6 +63,14 @@ export default function Home() {
               <li>Dashboard</li>
               <li>PSW encription</li>
               <li>Password recovery</li>
+            </ul>
+          </div>
+
+          <div className="col-sm-3">
+            <h4 className=" fw-normal text-primary">Marketing</h4>
+            <ul>
+              <li>GTM raedy</li>
+              <li>SEO ready: Open Graph tags</li>
             </ul>
           </div>
 
