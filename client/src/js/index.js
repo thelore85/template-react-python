@@ -1,16 +1,15 @@
-//import react into the bundle
-import React from 'react'
-import {createRoot} from 'react-dom/client'
 
-//include your index.scss file into the bundle
-import "./global.css";
+import React from 'react';
+import { createRoot } from 'react-dom';
+import Router from './router/router';
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import './global.css';
 
-//import your own components
-import Layout from './router/router.js'
-
-//
-const root = createRoot(document.querySelector("#app"))
-
-//render your react application
-root.render(<Layout/>)
-
+createRoot(document.querySelector('#app')).render(
+  <HelmetProvider >
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  </HelmetProvider>
+);
