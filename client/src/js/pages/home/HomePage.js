@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 export default function HomePage() {
 
@@ -10,15 +10,8 @@ export default function HomePage() {
         <title>BIGWEB.club - Full Stack web template</title>
         <meta name="title" content="Fulll Web App template for your React app | BIGWEB.club"/>
         <meta name="description" content="Start developing your Web App in seconds! All basic functionality already in place to focus only on your app dev. Have Fun!"/>
-        <meta name="keywords" content="Web development, Web Marketing, Web Design, full stack, react, python" />
-      
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.bigweb.club" />
-        <meta property="og:title" content="Fulll Web App template for your React app |HOME PAGE" />
-        <meta property="og:description" content="Start developing your Web App in seconds! All basic functionality already in place to focus only on your app dev. Have Fun!" />
-        <meta property="og:image" content="ogimage.jpg" />
 
-  </Helmet>
+    </Helmet>
     <main className="d-flex align-items-center bg-dark" style={{ minHeight: '80vh'}}>
       <div className="container py-5">
       
@@ -70,7 +63,9 @@ export default function HomePage() {
             <h4 className=" fw-normal text-primary">Marketing</h4>
             <ul>
               <li>GTM raedy</li>
-              <li>SEO ready: Open Graph tags</li>
+              <li>SEO: Open Graph tags</li>
+              <li>Meta: react-helmet-async</li>
+              <li>SSR: in progress</li>
             </ul>
           </div>
 
