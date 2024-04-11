@@ -7,7 +7,7 @@ COLOR SISTEM
 
 :root {
   --primary: #de81fd;
-  --primary-subtle: #ffe0c8;
+  --primary-subtle: rgba(213, 141, 255, 0.757);
   --primary-hover: #dd27f5;
   --on-primary: rgb(250, 250, 250);
   
