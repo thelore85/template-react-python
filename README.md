@@ -161,4 +161,4 @@ This template project is licensed under the MIT License - see the [LICENSE.md](h
 
 **Author**: thelore85
 
-**Website**: [piqus.it](https://piqus.it)
+**Website**: [bigweb.club](https://bigweb.club)
